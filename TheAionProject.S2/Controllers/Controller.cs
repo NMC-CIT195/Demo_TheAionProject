@@ -115,7 +115,8 @@ namespace TheAionProject
                         break;
 
                     case TravelerAction.Travel:
-                        //_gameConsoleView.Travel();
+                        _gameConsoleView.DisplayTravel();
+                        //_gameTraveler.SpaceTimeLocationID = _gameConsoleView.GetNewLocationChoice();
                         break;
 
                     case TravelerAction.TravelerInfo:
@@ -156,8 +157,10 @@ namespace TheAionProject
             // get traveler's age
             //
             _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(_gameTraveler), ActionMenu.MissionIntro, "");
-            _gameConsoleView.DisplayInputBoxPrompt($"Enter your age {_gameTraveler.Name}: ");
-            _gameTraveler.Age = _gameConsoleView.GetInteger();
+            int gameTravelerAge;
+
+            _gameConsoleView.GetInteger($"Enter your age {_gameTraveler.Name}: ", 0, 1000000, out gameTravelerAge);
+            _gameTraveler.Age = gameTravelerAge;
 
             //
             // get traveler's race

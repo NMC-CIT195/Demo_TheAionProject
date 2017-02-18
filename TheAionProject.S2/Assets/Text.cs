@@ -165,6 +165,30 @@ namespace TheAionProject
             return messageBoxText;
         }
 
+        //public static string Travel(int currentSpaceTimeLocationId, List<SpaceTimeLocation> spaceTimeLocations)
+        //{
+        //    string messageBoxText =
+        //        $"{gameTraveler.Name}, Aion Base will need to know the name of the new location.\n" +
+        //        " \n" +
+        //        "Enter the ID number of your desired location from the table below.\n" +
+        //        " \n";
+
+
+        //    string spaceTimeLocationList = null;
+
+        //    foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
+        //    {
+        //        if (race != Character.RaceType.None)
+        //        {
+        //            raceList += $"\t{race}\n";
+        //        }
+        //    }
+
+        //    messageBoxText += raceList;
+
+        //    return messageBoxText;
+        //}
+
         #endregion
     }
 }

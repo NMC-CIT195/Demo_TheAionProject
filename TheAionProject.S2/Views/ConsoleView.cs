@@ -92,9 +92,36 @@ namespace TheAionProject
         /// get an integer value from the user
         /// </summary>
         /// <returns>integer value</returns>
-        public int GetInteger()
+        public bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
         {
-            return int.Parse(Console.ReadLine());
+            bool validResponse = false;
+            integerChoice = 0;
+
+            DisplayInputBoxPrompt(prompt);
+            while (!validResponse)
+            {
+                if (int.TryParse(Console.ReadLine(), out integerChoice))
+                {
+                    if (integerChoice >= minimumValue && integerChoice <= maximumValue)
+                    {
+                        validResponse = true;
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                        DisplayInputBoxPrompt(prompt);
+                    }
+                }
+                else
+                {
+                    ClearInputBox();
+                    DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                    DisplayInputBoxPrompt(prompt);
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -265,6 +292,27 @@ namespace TheAionProject
             Console.CursorVisible = true;
         }
 
+        public void DisplayInputErrorMessage(string errorMessage)
+        {
+            Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + 2);
+            Console.ForegroundColor = ConsoleTheme.InputBoxErrorMessageForegroundColor;
+            Console.Write(errorMessage);
+            Console.ForegroundColor = ConsoleTheme.InputBoxForegroundColor;
+            Console.CursorVisible = true;
+        }
+
+        private void ClearInputBox()
+        {
+            string backgroundColorString = new String(' ', ConsoleLayout.InputBoxWidth - 4);
+
+            Console.ForegroundColor = ConsoleTheme.InputBoxBackgroundColor;
+            for (int row = 1; row < ConsoleLayout.InputBoxHeight - 2; row++)
+            {
+                Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + row);
+                DisplayInputBoxPrompt(backgroundColorString);
+            }
+            Console.ForegroundColor = ConsoleTheme.InputBoxForegroundColor;
+        }
 
         public void DisplayTravelerInfo()
         {
@@ -282,6 +330,11 @@ namespace TheAionProject
         {
             SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
             DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
+        }
+
+        public void DisplayTravel()
+        {
+            //DisplayGamePlayScreen("Travel to a New Space-Time Location", Text.Travel(_gameTraveler.SpaceTimeLocationID, _gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
         #endregion
