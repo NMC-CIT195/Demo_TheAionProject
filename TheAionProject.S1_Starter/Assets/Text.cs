@@ -38,7 +38,7 @@ namespace TheAionProject
             string messageBoxText =
             "You are now in the Norlon Corporation research facility located in " +
             "the city of Heraklion on the north coast of Crete. You have passed through " +
-            "heavy security and descended an unknown number of levels to the top secrete " +
+            "heavy security and descended an unknown number of levels to the top secret " +
             "research lab for the Aion Project.\n" +
             " \n" +
             "\tChoose from the menu options to proceed.\n";
