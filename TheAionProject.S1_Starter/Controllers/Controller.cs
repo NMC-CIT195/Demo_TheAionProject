@@ -91,7 +91,7 @@ namespace TheAionProject
             //
             while (_playingGame)
             {
-                _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(), ActionMenu.MainMenu, "");
+                _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.InitialLocationInfo(), ActionMenu.MainMenu, "");
                 travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
 
                 //

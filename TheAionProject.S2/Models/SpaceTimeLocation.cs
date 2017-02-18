@@ -13,6 +13,7 @@ namespace TheAionProject
         private string _name;
         private int _spaceTimeLocationID; // must be a unique value for each object
         private string _description;
+        private string _generalContents;
         private bool _accessable;
 
         #endregion
@@ -36,6 +37,12 @@ namespace TheAionProject
         {
             get { return _description; }
             set { _description = value; }
+        }
+
+        public string GeneralContents
+        {
+            get { return _generalContents; }
+            set { _generalContents = value; }
         }
 
         public bool Accessable

@@ -15,6 +15,8 @@ namespace TheAionProject
 
         private ConsoleView _gameConsoleView;
         private Traveler _gameTraveler;
+        private Universe _gameUniverse;
+        private SpaceTimeLocation _currentLocation;
         private bool _playingGame;
 
         #endregion
@@ -49,7 +51,8 @@ namespace TheAionProject
         private void InitializeGame()
         {
             _gameTraveler = new Traveler();
-            _gameConsoleView = new ConsoleView(_gameTraveler);
+            _gameUniverse = new Universe();
+            _gameConsoleView = new ConsoleView(_gameTraveler, _gameUniverse);
             _playingGame = true;
 
             Console.CursorVisible = false;
@@ -87,11 +90,16 @@ namespace TheAionProject
             InitializeMission();
 
             //
+            // prepare game play screen
+            //
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
+
+            //
             // game loop
             //
             while (_playingGame)
             {
-                _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(), ActionMenu.MainMenu, "");
                 travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
 
                 //
@@ -103,11 +111,11 @@ namespace TheAionProject
                         break;
 
                     case TravelerAction.LookAround:
-                        _gameConsoleView.DisplayTravelerInfo();
+                        _gameConsoleView.DisplayLookAround();
                         break;
 
                     case TravelerAction.Travel:
-                        _gameConsoleView.DisplayTravelerInfo();
+                        //_gameConsoleView.Travel();
                         break;
 
                     case TravelerAction.TravelerInfo:
@@ -163,6 +171,11 @@ namespace TheAionProject
             //
             _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(_gameTraveler), ActionMenu.MissionIntro, "");
             _gameConsoleView.GetContinueKey();
+
+            //
+            // set traveler's initial location
+            //
+            _gameTraveler.SpaceTimeLocationID = 1;
         }
 
         #endregion

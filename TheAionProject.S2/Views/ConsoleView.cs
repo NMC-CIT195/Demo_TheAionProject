@@ -11,9 +11,10 @@ namespace TheAionProject
         #region FIELDS
 
         //
-        // declare a Traveler object for the ConsoleView object to use
+        // declare game objects for the ConsoleView object to use
         //
         Traveler _gameTraveler;
+        Universe _gameUniverse;
 
         #endregion
 
@@ -26,9 +27,10 @@ namespace TheAionProject
         /// <summary>
         /// default constructor to create the console view objects
         /// </summary>
-        public ConsoleView(Traveler gameTraveler)
+        public ConsoleView(Traveler gameTraveler, Universe gameUniverse)
         {
             _gameTraveler = gameTraveler;
+            _gameUniverse = gameUniverse;
 
             InitializeDisplay();
         }
@@ -266,8 +268,20 @@ namespace TheAionProject
 
         public void DisplayTravelerInfo()
         {
-            DisplayGamePlayScreen("Traveler Information", Text.InitializeMissionEchoTravelerInfo(_gameTraveler), ActionMenu.MissionIntro, "");
-            GetContinueKey();
+            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            DisplayGamePlayScreen("Traveler Information", Text.TravelerInfo(_gameTraveler, currentSpaceTimeLocation), ActionMenu.MainMenu, "");
+        }
+
+        public void DisplayCurrentLocationInfo()
+        {
+            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
+        }
+
+        public void DisplayLookAround()
+        {
+            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
         }
 
         #endregion
