@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// static class to hold key/value pairs for menu options
+    /// </summary>
     public static class ActionMenu
     {
         public static Menu MissionIntro = new Menu()
@@ -35,7 +38,9 @@ namespace TheAionProject
             MenuChoices = new Dictionary<char, TravelerAction>()
                 {
                     { '1', TravelerAction.TravelerInfo },
-                    { '2', TravelerAction.Exit }
+                    { '2', TravelerAction.LookAround },
+                    { '3', TravelerAction.Travel },
+                    { '4', TravelerAction.Exit }
                 }
         };
 

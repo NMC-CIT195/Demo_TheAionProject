@@ -14,6 +14,8 @@ namespace TheAionProject
         public static List<string> HeaderText = new List<string>() { "The Aion Project" };
         public static List<string> FooterText = new List<string>() { "Laughing Leaf Productions, 2016" };
 
+        #region INTITIAL GAME SETUP
+
         public static string MissionIntro()
         {
             string messageBoxText =
@@ -123,6 +125,47 @@ namespace TheAionProject
 
             return messageBoxText;
         }
+
+        #endregion
+
+        #endregion
+
+        #region MAIN MENU ACTION SCREENS
+
+        public static string TravelerInfo(Traveler gameTraveler)
+        {
+            string messageBoxText =
+                $"\tTraveler Name: {gameTraveler.Name}\n" +
+                $"\tTraveler Age: {gameTraveler.Age}\n" +
+                $"\tTraveler Race: {gameTraveler.Race}\n" +
+                " \n";
+
+            return messageBoxText;
+        }
+
+        //public static string Travel(int currentSpaceTimeLocationId, List<SpaceTimeLocation> spaceTimeLocations)
+        //{
+        //    string messageBoxText =
+        //        $"{gameTraveler.Name}, Aion Base will need to know the name of the new location.\n" +
+        //        " \n" +
+        //        "Enter the ID number of your desired location from the table below.\n" +
+        //        " \n";
+
+
+        //    string spaceTimeLocationList = null;
+
+        //    foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
+        //    {
+        //        if (race != Character.RaceType.None)
+        //        {
+        //            raceList += $"\t{race}\n";
+        //        }
+        //    }
+
+        //    messageBoxText += raceList;
+
+        //    return messageBoxText;
+        //}
 
         #endregion
     }

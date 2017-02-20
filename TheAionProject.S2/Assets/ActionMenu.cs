@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// static class to hold key/value pairs for menu options
+    /// </summary>
     public static class ActionMenu
     {
         public static Menu MissionIntro = new Menu()

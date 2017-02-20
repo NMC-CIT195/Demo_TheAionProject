@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// static class sets the layout of the game screen
+    /// </summary>
     public static class ConsoleLayout
     {
         //

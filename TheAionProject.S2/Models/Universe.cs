@@ -7,6 +7,9 @@ using TheAionProject.Assets;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// class of the game map
+    /// </summary>
     public class Universe
     {
         #region ***** define all lists to be maintained by the Universe object *****

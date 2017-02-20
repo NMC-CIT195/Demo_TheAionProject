@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// static class to control the default console window functionality
+    /// </summary>
     public static class ConsoleWindowControl
     {
         //

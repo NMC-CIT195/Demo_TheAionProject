@@ -1,0 +1,7 @@
+Sprint 1
+Develop and customize the framework
+Initialize the game with the player's info
+
+Sprint 2 
+GameMap and Location classes
+Functionality: Look Around and Travel

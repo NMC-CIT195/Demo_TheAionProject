@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// class for the game map locations
+    /// </summary>
     public class SpaceTimeLocation
     {
         #region FIELDS

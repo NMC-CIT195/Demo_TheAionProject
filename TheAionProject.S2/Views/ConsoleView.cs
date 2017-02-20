@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// view class
+    /// </summary>
     public class ConsoleView
     {
         #region FIELDS
@@ -38,7 +41,13 @@ namespace TheAionProject
         #endregion
 
         #region METHODS
-
+        /// <summary>
+        /// display all of the elements on the game play screen on the console
+        /// </summary>
+        /// <param name="messageBoxHeaderText">message box header title</param>
+        /// <param name="messageBoxText">message box text</param>
+        /// <param name="menu">menu to use</param>
+        /// <param name="inputBoxPrompt">input box text</param>
         public void DisplayGamePlayScreen(string messageBoxHeaderText, string messageBoxText, Menu menu, string inputBoxPrompt)
         {
             //
@@ -72,6 +81,9 @@ namespace TheAionProject
         {
             TravelerAction choosenAction = TravelerAction.None;
 
+            //
+            // TODO validate menu choices
+            //
             ConsoleKeyInfo keyPressedInfo = Console.ReadKey();
             char keyPressed = keyPressedInfo.KeyChar;
             choosenAction = menu.MenuChoices[keyPressed];
@@ -173,6 +185,9 @@ namespace TheAionProject
             return playing;
         }
 
+        /// <summary>
+        /// initialize the console window settings
+        /// </summary>
         private static void InitializeDisplay()
         {
             //
@@ -191,6 +206,10 @@ namespace TheAionProject
             Console.CursorVisible = false;
         }
 
+        /// <summary>
+        /// display the correct menu in the menu box of the game screen
+        /// </summary>
+        /// <param name="menu">menu for current game state</param>
         private void DisplayMenuBox(Menu menu)
         {
             Console.BackgroundColor = ConsoleTheme.MenuBackgroundColor;
@@ -231,6 +250,11 @@ namespace TheAionProject
             }
         }
 
+        /// <summary>
+        /// display the text in the message box of the game screen
+        /// </summary>
+        /// <param name="headerText"></param>
+        /// <param name="messageText"></param>
         private void DisplayMessageBox(string headerText, string messageText)
         {
             //
@@ -272,6 +296,9 @@ namespace TheAionProject
 
         }
 
+        /// <summary>
+        /// draw the input box on the game screen
+        /// </summary>
         public void DisplayInputBox()
         {
             Console.BackgroundColor = ConsoleTheme.InputBoxBackgroundColor;
@@ -284,6 +311,10 @@ namespace TheAionProject
                 ConsoleLayout.InputBoxHeight);
         }
 
+        /// <summary>
+        /// display the prompt in the input box of the game screen
+        /// </summary>
+        /// <param name="prompt"></param>
         public void DisplayInputBoxPrompt(string prompt)
         {
             Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + 1);
@@ -292,6 +323,10 @@ namespace TheAionProject
             Console.CursorVisible = true;
         }
 
+        /// <summary>
+        /// display the error message in the input box of the game screen
+        /// </summary>
+        /// <param name="errorMessage">error message text</param>
         public void DisplayInputErrorMessage(string errorMessage)
         {
             Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + 2);
@@ -301,6 +336,9 @@ namespace TheAionProject
             Console.CursorVisible = true;
         }
 
+        /// <summary>
+        /// clear the input box
+        /// </summary>
         private void ClearInputBox()
         {
             string backgroundColorString = new String(' ', ConsoleLayout.InputBoxWidth - 4);
@@ -313,6 +351,54 @@ namespace TheAionProject
             }
             Console.ForegroundColor = ConsoleTheme.InputBoxForegroundColor;
         }
+
+        /// <summary>
+        /// get the player's initial information at the beginning of the game
+        /// </summary>
+        /// <returns>traveler object with all properties updated</returns>
+        public Traveler GetInitialTravelerInfo()
+        {
+            Traveler traveler = new Traveler();
+
+            //
+            // intro
+            //
+            DisplayGamePlayScreen("Mission Initialization", Text.InitializeMissionIntro(), ActionMenu.MissionIntro, "");
+            GetContinueKey();
+
+            //
+            // get traveler's name
+            //
+            DisplayGamePlayScreen("Mission Initialization - Name", Text.InitializeMissionGetTravelerName(), ActionMenu.MissionIntro, "");
+            DisplayInputBoxPrompt("Enter your name: ");
+            traveler.Name = GetString();
+
+            //
+            // get traveler's age
+            //
+            DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(traveler), ActionMenu.MissionIntro, "");
+            int gameTravelerAge;
+
+            GetInteger($"Enter your age {traveler.Name}: ", 0, 1000000, out gameTravelerAge);
+            traveler.Age = gameTravelerAge;
+
+            //
+            // get traveler's race
+            //
+            DisplayGamePlayScreen("Mission Initialization - Race", Text.InitializeMissionGetTravelerRace(traveler), ActionMenu.MissionIntro, "");
+            DisplayInputBoxPrompt($"Enter your race {traveler.Name}: ");
+            traveler.Race = GetRace();
+
+            //
+            // echo the traveler's info
+            //
+            DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(traveler), ActionMenu.MissionIntro, "");
+            GetContinueKey();
+
+            return traveler;
+        }
+
+        #region ----- display responses to menu action choices -----
 
         public void DisplayTravelerInfo()
         {
@@ -336,6 +422,8 @@ namespace TheAionProject
         {
             //DisplayGamePlayScreen("Travel to a New Space-Time Location", Text.Travel(_gameTraveler.SpaceTimeLocationID, _gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
         }
+
+        #endregion
 
         #endregion
     }

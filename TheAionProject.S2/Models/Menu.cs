@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// class hold information about each menu
+    /// </summary>
     public class Menu
     {
         public string MenuName { get; set; }

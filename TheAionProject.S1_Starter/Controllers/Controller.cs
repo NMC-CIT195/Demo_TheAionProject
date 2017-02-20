@@ -87,11 +87,16 @@ namespace TheAionProject
             InitializeMission();
 
             //
+            // prepare game play screen
+            //
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
+
+            //
             // game loop
             //
             while (_playingGame)
             {
-                _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.InitialLocationInfo(), ActionMenu.MainMenu, "");
                 travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
 
                 //
@@ -121,40 +126,17 @@ namespace TheAionProject
             Environment.Exit(1);
         }
 
+        /// <summary>
+        /// initialize the player info
+        /// </summary>
         private void InitializeMission()
         {
-            //
-            // intro
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization", Text.InitializeMissionIntro(), ActionMenu.MissionIntro, "");
-            _gameConsoleView.GetContinueKey();
+            Traveler traveler = _gameConsoleView.GetInitialTravelerInfo();
 
-            //
-            // get traveler's name
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Name", Text.InitializeMissionGetTravelerName(), ActionMenu.MissionIntro, "");
-            _gameConsoleView.DisplayInputBoxPrompt("Enter your name: ");
-            _gameTraveler.Name = _gameConsoleView.GetString();
-
-            //
-            // get traveler's age
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(_gameTraveler), ActionMenu.MissionIntro, "");
-            _gameConsoleView.DisplayInputBoxPrompt($"Enter your age {_gameTraveler.Name}: ");
-            _gameTraveler.Age = _gameConsoleView.GetInteger();
-
-            //
-            // get traveler's race
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Race", Text.InitializeMissionGetTravelerRace(_gameTraveler), ActionMenu.MissionIntro, "");
-            _gameConsoleView.DisplayInputBoxPrompt($"Enter your race {_gameTraveler.Name}: ");
-            _gameTraveler.Race = _gameConsoleView.GetRace();
-
-            //
-            // echo the traveler's info
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(_gameTraveler), ActionMenu.MissionIntro, "");
-            _gameConsoleView.GetContinueKey();
+            _gameTraveler.Name = traveler.Name;
+            _gameTraveler.Age = traveler.Age;
+            _gameTraveler.Race = traveler.Race;
+            _gameTraveler.SpaceTimeLocationID = 1;
         }
 
         #endregion

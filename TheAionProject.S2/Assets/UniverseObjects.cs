@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject.Assets
 {
+    /// <summary>
+    /// static class to hold all objects in the game universe; locations, game objects, npc's
+    /// </summary>
     public static class UniverseObjects
     {
         public static IEnumerable<SpaceTimeLocation> SpaceTimeLocations = new List<SpaceTimeLocation>()

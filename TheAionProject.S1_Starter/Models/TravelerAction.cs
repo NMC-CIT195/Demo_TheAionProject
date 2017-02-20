@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
+    /// <summary>
+    /// enum of all possible player actions
+    /// </summary>
     public enum TravelerAction
     {
         None,

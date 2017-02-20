@@ -138,46 +138,16 @@ namespace TheAionProject
             Environment.Exit(1);
         }
 
+        /// <summary>
+        /// initialize the player info
+        /// </summary>
         private void InitializeMission()
         {
-            //
-            // intro
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization", Text.InitializeMissionIntro(), ActionMenu.MissionIntro, "");
-            _gameConsoleView.GetContinueKey();
+            Traveler traveler = _gameConsoleView.GetInitialTravelerInfo();
 
-            //
-            // get traveler's name
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Name", Text.InitializeMissionGetTravelerName(), ActionMenu.MissionIntro, "");
-            _gameConsoleView.DisplayInputBoxPrompt("Enter your name: ");
-            _gameTraveler.Name = _gameConsoleView.GetString();
-
-            //
-            // get traveler's age
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(_gameTraveler), ActionMenu.MissionIntro, "");
-            int gameTravelerAge;
-
-            _gameConsoleView.GetInteger($"Enter your age {_gameTraveler.Name}: ", 0, 1000000, out gameTravelerAge);
-            _gameTraveler.Age = gameTravelerAge;
-
-            //
-            // get traveler's race
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Race", Text.InitializeMissionGetTravelerRace(_gameTraveler), ActionMenu.MissionIntro, "");
-            _gameConsoleView.DisplayInputBoxPrompt($"Enter your race {_gameTraveler.Name}: ");
-            _gameTraveler.Race = _gameConsoleView.GetRace();
-
-            //
-            // echo the traveler's info
-            //
-            _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(_gameTraveler), ActionMenu.MissionIntro, "");
-            _gameConsoleView.GetContinueKey();
-
-            //
-            // set traveler's initial location
-            //
+            _gameTraveler.Name = traveler.Name;
+            _gameTraveler.Age = traveler.Age;
+            _gameTraveler.Race = traveler.Race;
             _gameTraveler.SpaceTimeLocationID = 1;
         }
 
