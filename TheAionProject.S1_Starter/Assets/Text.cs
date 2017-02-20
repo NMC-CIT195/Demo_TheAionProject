@@ -35,7 +35,7 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string InitialLocationInfo()
+        public static string CurrrentLocationInfo()
         {
             string messageBoxText =
             "You are now in the Norlon Corporation research facility located in " +
