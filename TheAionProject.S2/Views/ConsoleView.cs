@@ -104,7 +104,7 @@ namespace TheAionProject
         /// get an integer value from the user
         /// </summary>
         /// <returns>integer value</returns>
-        public bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
+        private bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
         {
             bool validResponse = false;
             integerChoice = 0;
@@ -129,6 +129,44 @@ namespace TheAionProject
                 {
                     ClearInputBox();
                     DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                    DisplayInputBoxPrompt(prompt);
+                }
+            }
+
+            Console.CursorVisible = false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// get an integer value from the user
+        /// </summary>
+        /// <returns>integer value</returns>
+        public bool GetDouble(string prompt, double minimumValue, double maximumValue, out double doubleChoice)
+        {
+            bool validResponse = false;
+            doubleChoice = 0;
+
+            DisplayInputBoxPrompt(prompt);
+            while (!validResponse)
+            {
+                if (double.TryParse(Console.ReadLine(), out doubleChoice))
+                {
+                    if (doubleChoice >= minimumValue && doubleChoice <= maximumValue)
+                    {
+                        validResponse = true;
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage($"You must enter an number value between {minimumValue} and {maximumValue}. Please try again.");
+                        DisplayInputBoxPrompt(prompt);
+                    }
+                }
+                else
+                {
+                    ClearInputBox();
+                    DisplayInputErrorMessage($"You must enter an number value between {minimumValue} and {maximumValue}. Please try again.");
                     DisplayInputBoxPrompt(prompt);
                 }
             }
@@ -376,7 +414,7 @@ namespace TheAionProject
             //
             // get traveler's age
             //
-            DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(traveler), ActionMenu.MissionIntro, "");
+            DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(traveler.Name), ActionMenu.MissionIntro, "");
             int gameTravelerAge;
 
             GetInteger($"Enter your age {traveler.Name}: ", 0, 1000000, out gameTravelerAge);
@@ -418,9 +456,15 @@ namespace TheAionProject
             DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
         }
 
-        public void DisplayTravel()
+        public int DisplayGetNextSpaceTimeLocation()
         {
-            //DisplayGamePlayScreen("Travel to a New Space-Time Location", Text.Travel(_gameTraveler.SpaceTimeLocationID, _gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
+            int spaceTimeLocationId;
+
+            DisplayGamePlayScreen("Travel to a New Space-Time Location", Text.Travel(_gameTraveler, _gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
+
+            GetInteger($"Enter your new location {_gameTraveler.Name}: ", 1, _gameUniverse.GetMaxSpaceTimeLocationId(), out spaceTimeLocationId);
+
+            return spaceTimeLocationId;
         }
 
         #endregion

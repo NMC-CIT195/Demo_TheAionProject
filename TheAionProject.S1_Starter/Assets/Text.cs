@@ -72,10 +72,10 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string InitializeMissionGetTravelerAge(Traveler gameTraveler)
+        public static string InitializeMissionGetTravelerAge(string name)
         {
             string messageBoxText =
-                $"Very good then, we will call you {gameTraveler.Name} on this mission.\n" +
+                $"Very good then, we will call you {name} on this mission.\n" +
                 " \n" +
                 "Enter your age below.\n" +
                 " \n" +

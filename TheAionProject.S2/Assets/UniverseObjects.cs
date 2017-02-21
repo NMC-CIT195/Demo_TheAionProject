@@ -30,7 +30,7 @@ namespace TheAionProject.Assets
             new SpaceTimeLocation
             {
                 Name = "Felandrian Plains",
-                SpaceTimeLocationID = 3,
+                SpaceTimeLocationID = 2,
                 Description = "The Felandrian Plains are a common destination for tourist. " +
                     "Located just north of the equatorial line on the planet of Corlon, they" +
                     "provide excellent habitat for a rich ecosystem of flora and fauna.",
@@ -40,11 +40,11 @@ namespace TheAionProject.Assets
 
             new SpaceTimeLocation
             {
-                Name = "Felandrian Plains",
+                Name = "Xantoria Market",
                 SpaceTimeLocationID = 3,
-                Description = "The Felandrian Plains are a common destination for tourist. " +
-                    "Located just north of the equatorial line on the planet of Corlon, they" +
-                    "provide excellent habitat for a rich ecosystem of flora and fauna.",
+                Description = "The Xantoria market, once controlled by the Thorian elite, is now an " +
+                              "open market managed by the Xantorian Commerce Coop. It is a place " +
+                              "where many races from various systems trade goods.",
                 GeneralContents = "- stuff in the room -",
                 Accessable = true
             }

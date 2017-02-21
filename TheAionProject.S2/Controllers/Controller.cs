@@ -114,9 +114,10 @@ namespace TheAionProject
                         _gameConsoleView.DisplayLookAround();
                         break;
 
-                    case TravelerAction.Travel:
-                        _gameConsoleView.DisplayTravel();
-                        //_gameTraveler.SpaceTimeLocationID = _gameConsoleView.GetNewLocationChoice();
+                    case TravelerAction.Travel:                        
+                        _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
+                        _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
                         break;
 
                     case TravelerAction.TravelerInfo:

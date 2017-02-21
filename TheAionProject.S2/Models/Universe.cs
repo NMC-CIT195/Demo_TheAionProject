@@ -54,7 +54,26 @@ namespace TheAionProject
 
         #endregion
 
-        #region ***** define methods to return game element objects *****
+        #region ***** define methods to return game element objects and information *****
+
+        /// <summary>
+        /// return the next available ID for a SpaceTimeLocation object
+        /// </summary>
+        /// <returns>next SpaceTimeLocationObjectID </returns>
+        public int GetMaxSpaceTimeLocationId()
+        {
+            int MaxId = 0;
+
+            foreach (SpaceTimeLocation spaceTimeLocation in SpaceTimeLocations)
+            {
+                if (spaceTimeLocation.SpaceTimeLocationID > MaxId)
+                {
+                    MaxId = spaceTimeLocation.SpaceTimeLocationID;
+                }
+            }
+
+            return MaxId;
+        }
 
         /// <summary>
         /// get a SpaceTimeLocation object using an ID

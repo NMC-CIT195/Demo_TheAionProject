@@ -374,7 +374,7 @@ namespace TheAionProject
             //
             // get traveler's age
             //
-            DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(traveler), ActionMenu.MissionIntro, "");
+            DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(traveler.Name), ActionMenu.MissionIntro, "");
             int gameTravelerAge;
 
             GetInteger($"Enter your age {traveler.Name}: ", 0, 1000000, out gameTravelerAge);
