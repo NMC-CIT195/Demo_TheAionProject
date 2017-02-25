@@ -5,3 +5,31 @@ Initialize the game with the player's info
 Sprint 2 
 GameMap and Location classes
 Functionality: Look Around and Travel
+Add status box to game screen
+New Classes:
+	Universe
+	SpaceTimeLocation
+	UniverseObjects
+		SpaceTimeLocations
+Modified Classes (Field/Properties):
+	ConsoleView
+		gameUniverse
+	ConsoleTheme
+		"status box" properties
+	ConsoleLayout
+		"status box" properties
+Modified Classes (Methods)
+	Controller
+		UpdateGameStatus: (new)
+		DisplayStatusBox: (new)
+		Constructor: passed gameUniverse object
+		GetActionMenuChoice: validate keys
+		DisplayTravelerInfo: add current location
+	ConsoleView
+		GetDouble: (new)
+	Text
+		CurrentLocationInfo: (new)
+		LookAround: (new)
+		Travel: (new)
+
+

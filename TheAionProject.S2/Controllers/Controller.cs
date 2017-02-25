@@ -100,10 +100,18 @@ namespace TheAionProject
             //
             while (_playingGame)
             {
+                //
+                // process all flags, events, and stats
+                //
+                UpdateGameStatus();
+
+                //
+                // get next game action from player
+                //
                 travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
 
                 //
-                // choose an action based on the user's menu choice
+                // choose an action based on the player's menu choice
                 //
                 switch (travelerActionChoice)
                 {
@@ -150,6 +158,11 @@ namespace TheAionProject
             _gameTraveler.Age = traveler.Age;
             _gameTraveler.Race = traveler.Race;
             _gameTraveler.SpaceTimeLocationID = 1;
+        }
+
+        private void UpdateGameStatus()
+        {
+
         }
 
         #endregion

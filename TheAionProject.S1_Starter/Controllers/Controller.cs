@@ -96,10 +96,13 @@ namespace TheAionProject
             //
             while (_playingGame)
             {
+                //
+                // get next game action from player
+                //
                 travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
 
                 //
-                // choose an action based on the user's menu choice
+                // choose an action based on the player's menu choice
                 //
                 switch (travelerActionChoice)
                 {

@@ -63,6 +63,7 @@ namespace TheAionProject
             DisplayMessageBox(messageBoxHeaderText, messageBoxText);
             DisplayMenuBox(menu);
             DisplayInputBox();
+            DisplayStatusBox();
         }
 
         /// <summary>
@@ -82,10 +83,20 @@ namespace TheAionProject
             TravelerAction choosenAction = TravelerAction.None;
 
             //
-            // TODO validate menu choices
+            // create an array of valid keys from menu dictionary
             //
-            ConsoleKeyInfo keyPressedInfo = Console.ReadKey();
-            char keyPressed = keyPressedInfo.KeyChar;
+            char[] validKeys = menu.MenuChoices.Keys.ToArray();
+
+            //
+            // validate key pressed as in MenuChoices dictionary
+            //
+            char keyPressed;
+            do
+            {
+                ConsoleKeyInfo keyPressedInfo = Console.ReadKey();
+                keyPressed = keyPressedInfo.KeyChar;
+            } while (!validKeys.Contains(keyPressed));
+
             choosenAction = menu.MenuChoices[keyPressed];
 
             return choosenAction;
@@ -332,6 +343,21 @@ namespace TheAionProject
                 row++;
             }
 
+        }
+
+        /// <summary>
+        /// draw the status box on the game screen
+        /// </summary>
+        public void DisplayStatusBox()
+        {
+            Console.BackgroundColor = ConsoleTheme.InputBoxBackgroundColor;
+            Console.ForegroundColor = ConsoleTheme.InputBoxBorderColor;
+
+            ConsoleWindowHelper.DisplayBoxOutline(
+                ConsoleLayout.StatusBoxPositionTop,
+                ConsoleLayout.StatusBoxPositionLeft,
+                ConsoleLayout.StatusBoxWidth,
+                ConsoleLayout.StatusBoxHeight);
         }
 
         /// <summary>
