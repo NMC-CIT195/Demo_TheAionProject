@@ -32,7 +32,7 @@ namespace TheAionProject.Assets
                 Name = "Felandrian Plains",
                 SpaceTimeLocationID = 2,
                 Description = "The Felandrian Plains are a common destination for tourist. " +
-                    "Located just north of the equatorial line on the planet of Corlon, they" +
+                    "Located just north of the equatorial line on the planet of Corlon, they " +
                     "provide excellent habitat for a rich ecosystem of flora and fauna.",
                 GeneralContents = "- stuff in the room -",
                 Accessable = true
@@ -46,7 +46,7 @@ namespace TheAionProject.Assets
                               "open market managed by the Xantorian Commerce Coop. It is a place " +
                               "where many races from various systems trade goods.",
                 GeneralContents = "- stuff in the room -",
-                Accessable = true
+                Accessable = false
             }
 
         };

@@ -158,6 +158,10 @@ namespace TheAionProject
             _gameTraveler.Age = traveler.Age;
             _gameTraveler.Race = traveler.Race;
             _gameTraveler.SpaceTimeLocationID = 1;
+
+            _gameTraveler.Score = 0;
+            _gameTraveler.Health = 100;
+            _gameTraveler.Lives = 3;
         }
 
         private void UpdateGameStatus()

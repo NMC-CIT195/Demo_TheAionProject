@@ -18,12 +18,32 @@ namespace TheAionProject
 
         #region FIELDS
 
+        private int _score;
+        private int _health;
+        private int _lives;
 
         #endregion
 
 
         #region PROPERTIES
-        
+
+        public int Lives
+        {
+            get { return _lives; }
+            set { _lives = value; }
+        }
+
+        public int Health
+        {
+            get { return _health; }
+            set { _health = value; }
+        }
+
+        public int Score
+        {
+            get { return _score; }
+            set { _score = value; }
+        }
 
         #endregion
 

@@ -55,6 +55,50 @@ namespace TheAionProject
         #endregion
 
         #region ***** define methods to return game element objects and information *****
+        
+        public bool IsValidSpaceTimeLocationId(int spaceTimeLocationId)
+        {
+            List<int> spaceTimeLocationIds = new List<int>();
+
+            //
+            // create a list of space-time location ids
+            //
+            foreach (SpaceTimeLocation stl in _spaceTimeLocations)
+            {
+                spaceTimeLocationIds.Add(stl.SpaceTimeLocationID);
+            }
+
+            //
+            // determine if the space-time location id is a valid id and return the result
+            //
+            if (spaceTimeLocationIds.Contains(spaceTimeLocationId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// determine if a location is accessible to the player
+        /// </summary>
+        /// <param name="spaceTimeLocationId"></param>
+        /// <returns>accessible</returns>
+        public bool IsAccessibleLocation(int spaceTimeLocationId)
+        {
+            SpaceTimeLocation spaceTimeLocation = GetSpaceTimeLocationByID(spaceTimeLocationId);
+            if (spaceTimeLocation.Accessable == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         /// return the next available ID for a SpaceTimeLocation object

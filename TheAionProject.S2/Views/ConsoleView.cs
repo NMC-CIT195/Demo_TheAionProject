@@ -11,6 +11,16 @@ namespace TheAionProject
     /// </summary>
     public class ConsoleView
     {
+        #region ENUMS
+
+        private enum ViewStatus
+        {
+            TravelerInitialization,
+            PlayingGame
+        }
+
+        #endregion
+
         #region FIELDS
 
         //
@@ -18,6 +28,8 @@ namespace TheAionProject
         //
         Traveler _gameTraveler;
         Universe _gameUniverse;
+
+        ViewStatus _viewStatus;
 
         #endregion
 
@@ -34,6 +46,8 @@ namespace TheAionProject
         {
             _gameTraveler = gameTraveler;
             _gameUniverse = gameUniverse;
+
+            _viewStatus = ViewStatus.TravelerInitialization;
 
             InitializeDisplay();
         }
@@ -353,11 +367,54 @@ namespace TheAionProject
             Console.BackgroundColor = ConsoleTheme.InputBoxBackgroundColor;
             Console.ForegroundColor = ConsoleTheme.InputBoxBorderColor;
 
+            //
+            // display the outline for the status box
+            //
             ConsoleWindowHelper.DisplayBoxOutline(
                 ConsoleLayout.StatusBoxPositionTop,
                 ConsoleLayout.StatusBoxPositionLeft,
                 ConsoleLayout.StatusBoxWidth,
                 ConsoleLayout.StatusBoxHeight);
+
+            //
+            // display the text for the status box if playing game
+            //
+            if (_viewStatus == ViewStatus.PlayingGame)
+            {
+                //
+                // display status box header with title
+                //
+                Console.BackgroundColor = ConsoleTheme.StatusBoxBorderColor;
+                Console.ForegroundColor = ConsoleTheme.StatusBoxForegroundColor;
+                Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 2, ConsoleLayout.StatusBoxPositionTop + 1);
+                Console.Write(ConsoleWindowHelper.Center("Game Stats", ConsoleLayout.StatusBoxWidth - 4));
+                Console.BackgroundColor = ConsoleTheme.StatusBoxBackgroundColor;
+                Console.ForegroundColor = ConsoleTheme.StatusBoxForegroundColor;
+
+                //
+                // display stats
+                //
+                int startingRow = ConsoleLayout.StatusBoxPositionTop + 3;
+                int row = startingRow;
+                foreach (string statusTextLine in Text.StatusBox(_gameTraveler, _gameUniverse))
+                {
+                    Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 3, row);
+                    Console.Write(statusTextLine);
+                    row++;
+                }
+            }
+            else
+            {
+                //
+                // display status box header without header
+                //
+                Console.BackgroundColor = ConsoleTheme.StatusBoxBorderColor;
+                Console.ForegroundColor = ConsoleTheme.StatusBoxForegroundColor;
+                Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 2, ConsoleLayout.StatusBoxPositionTop + 1);
+                Console.Write(ConsoleWindowHelper.Center("", ConsoleLayout.StatusBoxWidth - 4));
+                Console.BackgroundColor = ConsoleTheme.StatusBoxBackgroundColor;
+                Console.ForegroundColor = ConsoleTheme.StatusBoxForegroundColor;
+            }
         }
 
         /// <summary>
@@ -459,6 +516,11 @@ namespace TheAionProject
             DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(traveler), ActionMenu.MissionIntro, "");
             GetContinueKey();
 
+            // 
+            // change view status to playing game
+            //
+            _viewStatus = ViewStatus.PlayingGame;
+
             return traveler;
         }
 
@@ -484,11 +546,38 @@ namespace TheAionProject
 
         public int DisplayGetNextSpaceTimeLocation()
         {
-            int spaceTimeLocationId;
+            int spaceTimeLocationId = 0;
+            bool validSpaceTimeLocationId = false;
 
             DisplayGamePlayScreen("Travel to a New Space-Time Location", Text.Travel(_gameTraveler, _gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
 
-            GetInteger($"Enter your new location {_gameTraveler.Name}: ", 1, _gameUniverse.GetMaxSpaceTimeLocationId(), out spaceTimeLocationId);
+            while (!validSpaceTimeLocationId)
+            {
+                //
+                // get an integer from the player
+                //
+                GetInteger($"Enter your new location {_gameTraveler.Name}: ", 1, _gameUniverse.GetMaxSpaceTimeLocationId(), out spaceTimeLocationId);
+
+                //
+                // validate integer as a valid space-time location id and determine accessibility
+                //
+                if (_gameUniverse.IsValidSpaceTimeLocationId(spaceTimeLocationId))
+                {
+                    if (_gameUniverse.GetSpaceTimeLocationByID(spaceTimeLocationId).Accessable)
+                    {
+                        validSpaceTimeLocationId = true;
+                    }
+                    else
+                    {
+                        // todo clear input
+                        DisplayInputErrorMessage("It appears you attempting to travel to an inaccessible location. Please try again.");
+                    }
+                }
+                else
+                {
+                    DisplayInputErrorMessage("It appears you entered an invalid Space-Time location id. Please try again.");
+                }
+            }
 
             return spaceTimeLocationId;
         }

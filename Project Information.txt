@@ -12,6 +12,8 @@ New Classes:
 	UniverseObjects
 		SpaceTimeLocations
 Modified Classes (Field/Properties):
+	Traveler
+		Score, Health, Lives
 	ConsoleView
 		gameUniverse
 	ConsoleTheme
@@ -25,8 +27,10 @@ Modified Classes (Methods)
 		Constructor: passed gameUniverse object
 		GetActionMenuChoice: validate keys
 		DisplayTravelerInfo: add current location
+		InitializeMission: add score, health and lives
 	ConsoleView
 		GetDouble: (new)
+		DisplayGetNextSpaceTimeLocation: (new)
 	Text
 		CurrentLocationInfo: (new)
 		LookAround: (new)
