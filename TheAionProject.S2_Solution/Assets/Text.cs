@@ -139,7 +139,7 @@ namespace TheAionProject
                 $"\tTraveler Age: {gameTraveler.Age}\n" +
                 $"\tTraveler Race: {gameTraveler.Race}\n" +
                 " \n" +
-                $"\tCurrent Location: {currentLocation.Name}\n" +
+                $"\tCurrent Location: {currentLocation.CommonName}\n" +
                 " \n";
 
             return messageBoxText;
@@ -148,7 +148,7 @@ namespace TheAionProject
         public static string CurrentLocationInfo(SpaceTimeLocation spaceTimeLocation)
         {
             string messageBoxText =
-                $"Current Location: {spaceTimeLocation.Name}\n" +
+                $"Current Location: {spaceTimeLocation.CommonName}\n" +
                 " \n" +
                 spaceTimeLocation.Description;
 
@@ -158,7 +158,7 @@ namespace TheAionProject
         public static string LookAround(SpaceTimeLocation spaceTimeLocation)
         {
             string messageBoxText =
-                $"Current Location: {spaceTimeLocation.Name}\n" +
+                $"Current Location: {spaceTimeLocation.CommonName}\n" +
                 " \n" +
                 spaceTimeLocation.GeneralContents;
 
@@ -189,10 +189,39 @@ namespace TheAionProject
                 {
                     spaceTimeLocationList +=
                         $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
-                        $"{spaceTimeLocation.Name}".PadRight(30) +
+                        $"{spaceTimeLocation.CommonName}".PadRight(30) +
                         $"{spaceTimeLocation.Accessable}".PadRight(10) +
                         Environment.NewLine;
                 }
+            }
+
+            messageBoxText += spaceTimeLocationList;
+
+            return messageBoxText;
+        }
+
+        public static string VisitedLocations(IEnumerable<SpaceTimeLocation> spaceTimeLocations)
+        {
+            string messageBoxText =
+                "Space-Time Locations Visited\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) +  "\n";
+
+            //
+            // display all locations
+            //
+            string spaceTimeLocationList = null;
+            foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
+            {
+                    spaceTimeLocationList +=
+                        $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
+                        $"{spaceTimeLocation.CommonName}".PadRight(30) +
+                        Environment.NewLine;
             }
 
             messageBoxText += spaceTimeLocationList;
@@ -206,7 +235,7 @@ namespace TheAionProject
         {
             List<string> statusBoxText = new List<string>();
 
-            statusBoxText.Add($"Score: {traveler.Score}\n");
+            statusBoxText.Add($"Experience Points: {traveler.ExperiencePoints}\n");
             statusBoxText.Add($"Health: {traveler.Health}\n");
             statusBoxText.Add($"Lives: {traveler.Lives}\n");
 

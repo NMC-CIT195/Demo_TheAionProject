@@ -12,8 +12,12 @@ New Classes:
 	UniverseObjects
 		SpaceTimeLocations
 Modified Classes (Field/Properties):
+	TravlerActions
+		add TravelerLocationsVisited
+	Character
+		change fields to protected for derived classes' access
 	Traveler
-		Score, Health, Lives
+		Experience Points, Health, Lives, SpaceTimeLocationsVisited
 	ConsoleView
 		gameUniverse
 	ConsoleTheme
@@ -21,6 +25,10 @@ Modified Classes (Field/Properties):
 	ConsoleLayout
 		"status box" properties
 Modified Classes (Methods)
+	ActionMenu
+		MainMenu: add TravelerLocationsVisited
+	Traveler
+		HasVisited: checks to see if the traveler had been at a given space-time location
 	Controller
 		UpdateGameStatus: (new)
 		DisplayStatusBox: (new)
@@ -28,6 +36,7 @@ Modified Classes (Methods)
 		GetActionMenuChoice: validate keys
 		DisplayTravelerInfo: add current location
 		InitializeMission: add score, health and lives
+		ManageGameLoop: add TravelerLocationsVisited to case
 	ConsoleView
 		GetDouble: (new)
 		DisplayGetNextSpaceTimeLocation: (new)

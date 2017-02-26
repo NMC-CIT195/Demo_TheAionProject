@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S1_Starter", "TheAionProject.S1_Starter\TheAionProject.S1_Starter.csproj", "{F03D0B1D-A1E7-41FB-8A70-2E60981B15F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S2_Solution", "TheAionProject.S2\TheAionProject.S2_Solution.csproj", "{E3113AA9-D8A6-4990-8DFE-C20DAC0E21AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S2_Solution", "TheAionProject.S2_Solution\TheAionProject.S2_Solution.csproj", "{E3113AA9-D8A6-4990-8DFE-C20DAC0E21AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{EA97269A-E209-4BD6-88B8-9F97CFF4F7CB}"
 	ProjectSection(SolutionItems) = preProject

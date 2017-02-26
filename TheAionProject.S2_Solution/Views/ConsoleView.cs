@@ -569,7 +569,7 @@ namespace TheAionProject
                     }
                     else
                     {
-                        // todo clear input
+                        ClearInputBox();
                         DisplayInputErrorMessage("It appears you attempting to travel to an inaccessible location. Please try again.");
                     }
                 }

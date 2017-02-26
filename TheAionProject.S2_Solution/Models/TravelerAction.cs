@@ -23,7 +23,8 @@ namespace TheAionProject
         TravelerInfo,
         TravelerInventory,
         TravelerTreasure,
-        ListTARDISDestinations,
+        TravelerLocationsVisited,
+        ListSpaceTimeLocations,
         ListItems,
         ListTreasures,
         Exit

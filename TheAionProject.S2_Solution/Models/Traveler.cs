@@ -18,19 +18,20 @@ namespace TheAionProject
 
         #region FIELDS
 
-        private int _score;
+        private int _experiencePoints;
         private int _health;
         private int _lives;
+        private List<int> _spaceTimeLocationsVisited;
 
         #endregion
 
 
         #region PROPERTIES
 
-        public int Lives
+        public int ExperiencePoints
         {
-            get { return _lives; }
-            set { _lives = value; }
+            get { return _experiencePoints; }
+            set { _experiencePoints = value; }
         }
 
         public int Health
@@ -39,10 +40,16 @@ namespace TheAionProject
             set { _health = value; }
         }
 
-        public int Score
+        public int Lives
         {
-            get { return _score; }
-            set { _score = value; }
+            get { return _lives; }
+            set { _lives = value; }
+        }
+        
+        public List<int> SpaceTimeLocationsVisited
+        {
+            get { return _spaceTimeLocationsVisited; }
+            set { _spaceTimeLocationsVisited = value; }
         }
 
         #endregion
@@ -52,19 +59,30 @@ namespace TheAionProject
 
         public Traveler()
         {
-
+            SpaceTimeLocationsVisited = new List<int>();
         }
 
         public Traveler(string name, RaceType race, int spaceTimeLocationID) : base(name, race, spaceTimeLocationID)
         {
-
+            SpaceTimeLocationsVisited = new List<int>();
         }
 
         #endregion
 
 
         #region METHODS
-        
+
+        public bool HasVisited(int _spaceTimeLocationID)
+        {
+            if (SpaceTimeLocationsVisited.Contains(_spaceTimeLocationID))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
     }

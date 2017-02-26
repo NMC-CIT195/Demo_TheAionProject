@@ -25,10 +25,10 @@ namespace TheAionProject
 
         #region FIELDS
 
-        private string _name;
-        private int _spaceTimeLocationID;
-        private int _age;
-        private RaceType _race;
+        protected string _name;
+        protected int _spaceTimeLocationID;
+        protected int _age;
+        protected RaceType _race;
 
         #endregion
 

@@ -40,7 +40,8 @@ namespace TheAionProject
                     { '1', TravelerAction.TravelerInfo },
                     { '2', TravelerAction.LookAround },
                     { '3', TravelerAction.Travel },
-                    { '4', TravelerAction.Exit }
+                    { '4', TravelerAction.TravelerLocationsVisited },
+                    { '5', TravelerAction.Exit }
                 }
         };
 

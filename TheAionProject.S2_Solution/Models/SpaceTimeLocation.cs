@@ -13,27 +13,42 @@ namespace TheAionProject
     {
         #region FIELDS
 
-        private string _name;
+        private string _commonName;
         private int _spaceTimeLocationID; // must be a unique value for each object
+        private int _universalDate;
+        private string _universalLocation;
         private string _description;
         private string _generalContents;
         private bool _accessable;
+        private int _experiencePoints;
 
         #endregion
 
 
         #region PROPERTIES
 
-        public string Name
+        public string CommonName
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _commonName; }
+            set { _commonName = value; }
         }
 
         public int SpaceTimeLocationID
         {
             get { return _spaceTimeLocationID; }
             set { _spaceTimeLocationID = value; }
+        }
+
+        public int UniversalDate
+        {
+            get { return _universalDate; }
+            set { _universalDate = value; }
+        }
+
+        public string UniversalLocation
+        {
+            get { return _universalLocation; }
+            set { _universalLocation = value; }
         }
 
         public string Description
@@ -52,6 +67,12 @@ namespace TheAionProject
         {
             get { return _accessable; }
             set { _accessable = value; }
+        }
+
+        public int ExperiencePoints
+        {
+            get { return _experiencePoints; }
+            set { _experiencePoints = value; }
         }
 
         #endregion
