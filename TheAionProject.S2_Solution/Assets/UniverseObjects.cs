@@ -11,7 +11,7 @@ namespace TheAionProject.Assets
     /// </summary>
     public static class UniverseObjects
     {
-        public static IEnumerable<SpaceTimeLocation> SpaceTimeLocations = new List<SpaceTimeLocation>()
+        public static List<SpaceTimeLocation> SpaceTimeLocations = new List<SpaceTimeLocation>()
         {
 
             new SpaceTimeLocation
@@ -54,7 +54,7 @@ namespace TheAionProject.Assets
                               "open market managed by the Xantorian Commerce Coop. It is a place " +
                               "where many races from various systems trade goods.",
                 GeneralContents = "- stuff in the room -",
-                Accessable = true,
+                Accessable = false,
                 ExperiencePoints = 20
             },
 

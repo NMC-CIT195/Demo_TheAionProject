@@ -49,7 +49,7 @@ namespace TheAionProject
         /// </summary>
         private void IntializeUniverse()
         {
-            _spaceTimeLocations = UniverseObjects.SpaceTimeLocations as List<SpaceTimeLocation>;
+            _spaceTimeLocations = UniverseObjects.SpaceTimeLocations;
         }
 
         #endregion

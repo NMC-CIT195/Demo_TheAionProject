@@ -38,22 +38,8 @@ namespace TheAionProject
             MenuChoices = new Dictionary<char, TravelerAction>()
                 {
                     { '1', TravelerAction.TravelerInfo },
-                    { '2', TravelerAction.LookAround },
-                    { '3', TravelerAction.Travel },
-                    { '4', TravelerAction.Exit }
+                    { '2', TravelerAction.Exit }
                 }
         };
-
-        //public static Menu ManageTraveler = new Menu()
-        //{
-        //    MenuName = "ManageTraveler",
-        //    MenuTitle = "Manage Traveler",
-        //    MenuChoices = new Dictionary<char, TravelerAction>()
-        //            {
-        //                TravelerAction.MissionSetup,
-        //                TravelerAction.TravelerInfo,
-        //                TravelerAction.Exit
-        //            }
-        //};
     }
 }
