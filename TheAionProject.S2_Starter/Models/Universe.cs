@@ -47,6 +47,11 @@ namespace TheAionProject
 
         #region ***** define methods to return game element objects and information *****
         
+        /// <summary>
+        /// determine if the Space-Time Location Id is valid
+        /// </summary>
+        /// <param name="spaceTimeLocationId">true if Space-Time Location exists</param>
+        /// <returns></returns>
         public bool IsValidSpaceTimeLocationId(int spaceTimeLocationId)
         {
 
@@ -78,11 +83,11 @@ namespace TheAionProject
         }
 
         /// <summary>
-        /// get a SpaceTimeLocation object using an ID
+        /// get a SpaceTimeLocation object using an Id
         /// </summary>
-        /// <param name="ID">space-time location ID</param>
+        /// <param name="Id">space-time location ID</param>
         /// <returns>requested space-time location</returns>
-        public SpaceTimeLocation GetSpaceTimeLocationByID(int ID)
+        public SpaceTimeLocation GetSpaceTimeLocationById(int Id)
         {
             SpaceTimeLocation spaceTimeLocation = null;
 

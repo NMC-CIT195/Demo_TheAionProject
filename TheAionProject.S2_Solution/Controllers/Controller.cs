@@ -92,7 +92,7 @@ namespace TheAionProject
             //
             // prepare game play screen
             //
-            _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
             _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
 
             //
@@ -131,7 +131,7 @@ namespace TheAionProject
                         // get new location choice and update the current location property
                         //                        
                         _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
-                        _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+                        _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
 
                         //
                         // set the game play screen to the current location info format
@@ -140,20 +140,11 @@ namespace TheAionProject
                         break;
 
                     case TravelerAction.TravelerLocationsVisited:
-                        //
-                        // generate a list of space time locations that have been visited
-                        //
-                        List<SpaceTimeLocation> visitedSpaceTimeLocations = new List<SpaceTimeLocation>();
-                        foreach (int spaceTimeLocationId in _gameTraveler.SpaceTimeLocationsVisited)
-                        {
-                            visitedSpaceTimeLocations.Add(_gameUniverse.GetSpaceTimeLocationByID(spaceTimeLocationId));
-                        }
-
-                        _gameConsoleView.DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
-                        break;
+                        _gameConsoleView.DisplayLocationsVisited();
+                          break;
 
                     case TravelerAction.ListSpaceTimeLocations:
-                        _gameConsoleView.DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayListOfSpaceTimeLocations();
                         break;
 
                     case TravelerAction.Exit:

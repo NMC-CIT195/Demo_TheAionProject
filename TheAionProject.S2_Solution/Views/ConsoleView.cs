@@ -95,6 +95,7 @@ namespace TheAionProject
         public TravelerAction GetActionMenuChoice(Menu menu)
         {
             TravelerAction choosenAction = TravelerAction.None;
+            Console.CursorVisible = false;
 
             //
             // create an array of valid keys from menu dictionary
@@ -107,11 +108,12 @@ namespace TheAionProject
             char keyPressed;
             do
             {
-                ConsoleKeyInfo keyPressedInfo = Console.ReadKey();
+                ConsoleKeyInfo keyPressedInfo = Console.ReadKey(true);
                 keyPressed = keyPressedInfo.KeyChar;
             } while (!validKeys.Contains(keyPressed));
 
             choosenAction = menu.MenuChoices[keyPressed];
+            Console.CursorVisible = true;
 
             return choosenAction;
         }
@@ -528,19 +530,19 @@ namespace TheAionProject
 
         public void DisplayTravelerInfo()
         {
-            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
             DisplayGamePlayScreen("Traveler Information", Text.TravelerInfo(_gameTraveler, currentSpaceTimeLocation), ActionMenu.MainMenu, "");
         }
 
         public void DisplayCurrentLocationInfo()
         {
-            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
             DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
         }
 
         public void DisplayLookAround()
         {
-            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
+            SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
             DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
         }
 
@@ -563,7 +565,7 @@ namespace TheAionProject
                 //
                 if (_gameUniverse.IsValidSpaceTimeLocationId(spaceTimeLocationId))
                 {
-                    if (_gameUniverse.GetSpaceTimeLocationByID(spaceTimeLocationId).Accessable)
+                    if (_gameUniverse.GetSpaceTimeLocationById(spaceTimeLocationId).Accessable)
                     {
                         validSpaceTimeLocationId = true;
                     }
@@ -580,6 +582,25 @@ namespace TheAionProject
             }
 
             return spaceTimeLocationId;
+        }
+
+        public void DisplayLocationsVisited()
+        {
+            //
+            // generate a list of space time locations that have been visited
+            //
+            List<SpaceTimeLocation> visitedSpaceTimeLocations = new List<SpaceTimeLocation>();
+            foreach (int spaceTimeLocationId in _gameTraveler.SpaceTimeLocationsVisited)
+            {
+                visitedSpaceTimeLocations.Add(_gameUniverse.GetSpaceTimeLocationById(spaceTimeLocationId));
+            }
+
+            DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
+        }
+
+        public void DisplayListOfSpaceTimeLocations()
+        {
+            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
         #endregion

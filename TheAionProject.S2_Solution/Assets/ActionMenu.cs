@@ -41,7 +41,7 @@ namespace TheAionProject
                     { '2', TravelerAction.LookAround },
                     { '3', TravelerAction.Travel },
                     { '4', TravelerAction.TravelerLocationsVisited },
-                    { '6', TravelerAction.ListSpaceTimeLocations },
+                    { '5', TravelerAction.ListSpaceTimeLocations },
                     { '0', TravelerAction.Exit }
                 }
         };

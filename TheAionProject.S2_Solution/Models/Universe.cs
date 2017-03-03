@@ -88,7 +88,7 @@ namespace TheAionProject
         /// <returns>accessible</returns>
         public bool IsAccessibleLocation(int spaceTimeLocationId)
         {
-            SpaceTimeLocation spaceTimeLocation = GetSpaceTimeLocationByID(spaceTimeLocationId);
+            SpaceTimeLocation spaceTimeLocation = GetSpaceTimeLocationById(spaceTimeLocationId);
             if (spaceTimeLocation.Accessable == true)
             {
                 return true;
@@ -119,11 +119,11 @@ namespace TheAionProject
         }
 
         /// <summary>
-        /// get a SpaceTimeLocation object using an ID
+        /// get a SpaceTimeLocation object using an Id
         /// </summary>
-        /// <param name="ID">space-time location ID</param>
+        /// <param name="Id">space-time location Id</param>
         /// <returns>requested space-time location</returns>
-        public SpaceTimeLocation GetSpaceTimeLocationByID(int ID)
+        public SpaceTimeLocation GetSpaceTimeLocationById(int Id)
         {
             SpaceTimeLocation spaceTimeLocation = null;
 
@@ -132,7 +132,7 @@ namespace TheAionProject
             //
             foreach (SpaceTimeLocation location in _spaceTimeLocations)
             {
-                if (location.SpaceTimeLocationID == ID)
+                if (location.SpaceTimeLocationID == Id)
                 {
                     spaceTimeLocation = location;
                 }
@@ -144,8 +144,8 @@ namespace TheAionProject
             //
             if (spaceTimeLocation == null)
             {
-                string feedbackMessage = $"The Space-Time Location ID {ID} does not exist in the current Universe.";
-                throw new ArgumentException(ID.ToString(), feedbackMessage);
+                string feedbackMessage = $"The Space-Time Location ID {Id} does not exist in the current Universe.";
+                throw new ArgumentException(Id.ToString(), feedbackMessage);
             }
 
             return spaceTimeLocation;
