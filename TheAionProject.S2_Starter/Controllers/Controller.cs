@@ -15,8 +15,6 @@ namespace TheAionProject
 
         private ConsoleView _gameConsoleView;
         private Traveler _gameTraveler;
-        private Universe _gameUniverse;
-        private SpaceTimeLocation _currentLocation;
         private bool _playingGame;
 
         #endregion
@@ -51,8 +49,7 @@ namespace TheAionProject
         private void InitializeGame()
         {
             _gameTraveler = new Traveler();
-            _gameUniverse = new Universe();
-            _gameConsoleView = new ConsoleView(_gameTraveler, _gameUniverse);
+            _gameConsoleView = new ConsoleView(_gameTraveler);
             _playingGame = true;
 
             Console.CursorVisible = false;
@@ -92,19 +89,13 @@ namespace TheAionProject
             //
             // prepare game play screen
             //
-            _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
-            _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
+            _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrrentLocationInfo(), ActionMenu.MainMenu, "");
 
             //
             // game loop
             //
             while (_playingGame)
             {
-                //
-                // process all flags, events, and stats
-                //
-                UpdateGameStatus();
-
                 //
                 // get next game action from player
                 //
@@ -120,40 +111,6 @@ namespace TheAionProject
 
                     case TravelerAction.TravelerInfo:
                         _gameConsoleView.DisplayTravelerInfo();
-                        break;
-
-                    case TravelerAction.LookAround:
-                        _gameConsoleView.DisplayLookAround();
-                        break;
-
-                    case TravelerAction.Travel:
-                        //
-                        // get new location choice and update the current location property
-                        //                        
-                        _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
-                        _currentLocation = _gameUniverse.GetSpaceTimeLocationByID(_gameTraveler.SpaceTimeLocationID);
-
-                        //
-                        // set the game play screen to the current location info format
-                        //
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
-                        break;
-
-                    case TravelerAction.TravelerLocationsVisited:
-                        //
-                        // generate a list of space time locations that have been visited
-                        //
-                        List<SpaceTimeLocation> visitedSpaceTimeLocations = new List<SpaceTimeLocation>();
-                        foreach (int spaceTimeLocationId in _gameTraveler.SpaceTimeLocationsVisited)
-                        {
-                            visitedSpaceTimeLocations.Add(_gameUniverse.GetSpaceTimeLocationByID(spaceTimeLocationId));
-                        }
-
-                        _gameConsoleView.DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
-                        break;
-
-                    case TravelerAction.ListSpaceTimeLocations:
-                        _gameConsoleView.DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
                         break;
 
                     case TravelerAction.Exit:
@@ -182,26 +139,6 @@ namespace TheAionProject
             _gameTraveler.Age = traveler.Age;
             _gameTraveler.Race = traveler.Race;
             _gameTraveler.SpaceTimeLocationID = 1;
-
-            _gameTraveler.ExperiencePoints = 0;
-            _gameTraveler.Health = 100;
-            _gameTraveler.Lives = 3;
-        }
-
-        private void UpdateGameStatus()
-        {
-            if (!_gameTraveler.HasVisited(_currentLocation.SpaceTimeLocationID))
-            {
-                //
-                // add new location to the list of visited locations if this is a first visit
-                //
-                _gameTraveler.SpaceTimeLocationsVisited.Add(_currentLocation.SpaceTimeLocationID);
-
-                //
-                // update experience points for visiting locations
-                //
-                _gameTraveler.ExperiencePoints += _currentLocation.ExperiencePoints;
-            }
         }
 
         #endregion

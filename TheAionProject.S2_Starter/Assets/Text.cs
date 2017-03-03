@@ -35,7 +35,7 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string InitialLocationInfo()
+        public static string CurrrentLocationInfo()
         {
             string messageBoxText =
             "You are now in the Norlon Corporation research facility located in " +
@@ -132,141 +132,24 @@ namespace TheAionProject
 
         #region MAIN MENU ACTION SCREENS
 
-        public static string TravelerInfo(Traveler gameTraveler, SpaceTimeLocation currentLocation)
+        public static string TravelerInfo(Traveler gameTraveler)
         {
             string messageBoxText =
                 $"\tTraveler Name: {gameTraveler.Name}\n" +
                 $"\tTraveler Age: {gameTraveler.Age}\n" +
                 $"\tTraveler Race: {gameTraveler.Race}\n" +
-                " \n" +
-                $"\tCurrent Location: {currentLocation.CommonName}\n" +
                 " \n";
-
-            return messageBoxText;
-        }
-
-        public static string CurrentLocationInfo(SpaceTimeLocation spaceTimeLocation)
-        {
-            string messageBoxText =
-                $"Current Location: {spaceTimeLocation.CommonName}\n" +
-                " \n" +
-                spaceTimeLocation.Description;
-
-            return messageBoxText;
-        }
-
-        public static string LookAround(SpaceTimeLocation spaceTimeLocation)
-        {
-            string messageBoxText =
-                $"Current Location: {spaceTimeLocation.CommonName}\n" +
-                " \n" +
-                spaceTimeLocation.GeneralContents;
-
-            return messageBoxText;
-        }
-
-        public static string Travel(Traveler gametraveler, List<SpaceTimeLocation> spaceTimeLocations)
-        {
-            string messageBoxText =
-                $"{gametraveler.Name}, Aion Base will need to know the name of the new location.\n" +
-                " \n" +
-                "Enter the ID number of your desired location from the table below.\n" +
-                " \n" +
-
-                //
-                // display table header
-                //
-                "ID".PadRight(10) + "Name".PadRight(30) + "Accessible".PadRight(10) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) + "-------".PadRight(10) + "\n";
-
-            //
-            // display all locations except the current location
-            //
-            string spaceTimeLocationList = null;
-            foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
-            {
-                if (spaceTimeLocation.SpaceTimeLocationID != gametraveler.SpaceTimeLocationID)
-                {
-                    spaceTimeLocationList +=
-                        $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
-                        $"{spaceTimeLocation.CommonName}".PadRight(30) +
-                        $"{spaceTimeLocation.Accessable}".PadRight(10) +
-                        Environment.NewLine;
-                }
-            }
-
-            messageBoxText += spaceTimeLocationList;
-
-            return messageBoxText;
-        }
-
-        public static string VisitedLocations(IEnumerable<SpaceTimeLocation> spaceTimeLocations)
-        {
-            string messageBoxText =
-                "Space-Time Locations Visited\n" +
-                " \n" +
-
-                //
-                // display table header
-                //
-                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) +  "\n";
-
-            //
-            // display all locations
-            //
-            string spaceTimeLocationList = null;
-            foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
-            {
-                    spaceTimeLocationList +=
-                        $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
-                        $"{spaceTimeLocation.CommonName}".PadRight(30) +
-                        Environment.NewLine;
-            }
-
-            messageBoxText += spaceTimeLocationList;
-
-            return messageBoxText;
-        }
-
-        public static string ListSpaceTimeLocations(IEnumerable<SpaceTimeLocation> spaceTimeLocations)
-        {
-            string messageBoxText =
-                "Space-Time Locations\n" +
-                " \n" +
-
-                //
-                // display table header
-                //
-                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) + "\n";
-
-            //
-            // display all locations
-            //
-            string spaceTimeLocationList = null;
-            foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
-            {
-                spaceTimeLocationList +=
-                    $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
-                    $"{spaceTimeLocation.CommonName}".PadRight(30) +
-                    Environment.NewLine;
-            }
-
-            messageBoxText += spaceTimeLocationList;
 
             return messageBoxText;
         }
 
         #endregion
 
-        public static List<string> StatusBox(Traveler traveler, Universe universe)
+        public static List<string> StatusBox(Traveler traveler)
         {
             List<string> statusBoxText = new List<string>();
 
-            statusBoxText.Add($"Experience Points: {traveler.ExperiencePoints}\n");
-            statusBoxText.Add($"Health: {traveler.Health}\n");
-            statusBoxText.Add($"Lives: {traveler.Lives}\n");
+            statusBoxText.Add($"Traveler's Age: {traveler.Age}\n");
 
             return statusBoxText;
         }
