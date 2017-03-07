@@ -26,7 +26,7 @@ namespace TheAionProject
                 GeneralContents = "The lab is a large, well lit room, and staffed " +
                     "by a small number of scientists, all wearing light blue uniforms with the " +
                     "hydra-like Norlan Corporation logo. \n",
-                Accessable = true,
+                Accessible = true,
                 ExperiencePoints = 10
             },
 
@@ -40,7 +40,7 @@ namespace TheAionProject
                     "Located just north of the equatorial line on the planet of Corlon, they " +
                     "provide excellent habitat for a rich ecosystem of flora and fauna.",
                 GeneralContents = "- stuff in the room -",
-                Accessable = true,
+                Accessible = true,
                 ExperiencePoints = 10
             },
 
@@ -54,7 +54,7 @@ namespace TheAionProject
                               "open market managed by the Xantorian Commerce Coop. It is a place " +
                               "where many races from various systems trade goods.",
                 GeneralContents = "- stuff in the room -",
-                Accessable = false,
+                Accessible = false,
                 ExperiencePoints = 20
             },
 
@@ -68,7 +68,7 @@ namespace TheAionProject
                               "Norlon, founded in 1985 as a bio-tech company, is now a 36 billion dollar company " +
                               "with huge holdings in defense and space research and development.",
                 GeneralContents = "- stuff in the room -",
-                Accessable = true,
+                Accessible = true,
                 ExperiencePoints = 10
             }
         };
