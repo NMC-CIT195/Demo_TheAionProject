@@ -565,7 +565,7 @@ namespace TheAionProject
                 //
                 if (_gameUniverse.IsValidSpaceTimeLocationId(spaceTimeLocationId))
                 {
-                    if (_gameUniverse.GetSpaceTimeLocationById(spaceTimeLocationId).Accessible)
+                    if (_gameUniverse.IsAccessibleLocation(spaceTimeLocationId))
                     {
                         validSpaceTimeLocationId = true;
                     }

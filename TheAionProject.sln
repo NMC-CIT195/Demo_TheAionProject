@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S2_Starter", "TheAionProject.S2_Starter\TheAionProject.S2_Starter.csproj", "{0A3118F4-4BE1-4E64-8F84-DD446C0FEC33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S3_Starter", "TheAionProject.S3_Starter\TheAionProject.S3_Starter.csproj", "{D525C7A8-8175-4678-8B19-0674040A17F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S3_Solution", "TheAionProject.S3_Solution\TheAionProject.S3_Solution.csproj", "{D525C7A8-8175-4678-8B19-0674040A17F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

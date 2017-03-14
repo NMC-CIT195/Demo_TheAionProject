@@ -258,6 +258,38 @@ namespace TheAionProject
             return messageBoxText;
         }
 
+        public static string ListGameObjects(IEnumerable<GameObject> gameObjects)
+        {
+            string messageBoxText =
+                "Traveler Objects\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) + "Name".PadRight(30) + "Type".PadRight(20) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) + "----------------------".PadRight(20) + "\n";
+
+            //
+            // display all traveler objects
+            //
+            string travelerObject = null;
+
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject +=
+                    $"{gameObject.Id}".PadRight(10) +
+                    $"{gameObject.Name}".PadRight(30) +
+                    $"{gameObject.}".PadRight(30) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += travelerObject;
+
+            return messageBoxText;
+        }
+
         #endregion
 
         public static List<string> StatusBox(Traveler traveler, Universe universe)

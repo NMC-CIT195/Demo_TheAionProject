@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    public class Treasure : InventoriableObject
+    public enum TravelerObjectType
     {
-        public TreasureType Type { get; set; }
-
+        Food,
+        Medicine,
+        Weapon,
+        Treasure,
+        Information
     }
 }

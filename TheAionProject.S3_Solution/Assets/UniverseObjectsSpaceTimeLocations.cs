@@ -9,7 +9,7 @@ namespace TheAionProject
     /// <summary>
     /// static class to hold all objects in the game universe; locations, game objects, npc's
     /// </summary>
-    public static class UniverseObjects
+    public static partial class UniverseObjects
     {
         public static List<SpaceTimeLocation> SpaceTimeLocations = new List<SpaceTimeLocation>()
         {
@@ -69,21 +69,6 @@ namespace TheAionProject
                 GeneralContents = "- stuff in the room -",
                 Accessible = true,
                 ExperiencePoints = 10
-            }
-        };
-
-        public static List<GameObject> GameObjects = new List<GameObject>()
-        {
-            new Treasure
-            {
-                Id = 1,
-                Name = "Bag of Gold",
-                SpaceTimeLocationId = 2,
-                Description = "A small leather pouch filled with 9 gold coins.",
-                Type = TreasureType.Coin,
-                HasValue = true,
-                Value = 45,
-                IsInInventory = false
             }
         };
     }

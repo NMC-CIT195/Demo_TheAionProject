@@ -14,14 +14,21 @@ namespace TheAionProject
         #region ***** define all lists to be maintained by the Universe object *****
 
         //
-        // list of all space-time locations
+        // list of all space-time locations and game objects
         //
         private List<SpaceTimeLocation> _spaceTimeLocations;
-
+        private List<GameObject> _gameObjects;
+        
         public List<SpaceTimeLocation> SpaceTimeLocations
         {
             get { return _spaceTimeLocations; }
             set { _spaceTimeLocations = value; }
+        }
+
+        public List<GameObject> GameObjects
+        {
+            get { return _gameObjects; }
+            set { _gameObjects = value; }
         }
 
         #endregion
@@ -44,17 +51,23 @@ namespace TheAionProject
         #region ***** define methods to initialize all game elements *****
 
         /// <summary>
-        /// initialize the universe with all of the space-time locations
+        /// initialize the universe with all of the space-time locations and game objects
         /// </summary>
         private void IntializeUniverse()
         {
             _spaceTimeLocations = UniverseObjects.SpaceTimeLocations;
+            _gameObjects = UniverseObjects.gameObjects;
         }
 
         #endregion
 
         #region ***** define methods to return game element objects and information *****
-        
+
+        /// <summary>
+        /// validate space time location id number
+        /// </summary>
+        /// <param name="spaceTimeLocationId"></param>
+        /// <returns>is Id valid</returns>
         public bool IsValidSpaceTimeLocationId(int spaceTimeLocationId)
         {
             List<int> spaceTimeLocationIds = new List<int>();
@@ -80,6 +93,35 @@ namespace TheAionProject
             }
         }
 
+        /// <summary>
+        /// validate game object id number
+        /// </summary>
+        /// <param name="gameObjectId"></param>
+        /// <returns>is Id valid</returns>
+        public bool IsValidGameObjectId(int gameObjectId)
+        {
+            List<int> gameObjectIds = new List<int>();
+
+            //
+            // create a list of game object ids
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                gameObjectIds.Add(gameObject.Id);
+            }
+
+            //
+            // determine if the game object id is a valid id and return the result
+            //
+            if (gameObjectIds.Contains(gameObjectId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         /// determine if a location is accessible to the player
@@ -149,6 +191,39 @@ namespace TheAionProject
             }
 
             return spaceTimeLocation;
+        }
+
+        /// <summary>
+        /// get a game object using an Id
+        /// </summary>
+        /// <param name="Id">game object Id</param>
+        /// <returns>requested game object</returns>
+        public GameObject GetGameObjectById(int Id)
+        {
+            GameObject gameObjectToReturn = null;
+
+            //
+            // run through the game object list and grab the correct one
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.Id == Id)
+                {
+                    gameObjectToReturn = gameObject;
+                }
+            }
+
+            //
+            // the specified ID was not found in the universe
+            // throw and exception
+            //
+            if (gameObjectToReturn == null)
+            {
+                string feedbackMessage = $"The Game Object ID {Id} does not exist in the current Universe.";
+                throw new ArgumentException(Id.ToString(), feedbackMessage);
+            }
+
+            return gameObjectToReturn;
         }
 
         #endregion
