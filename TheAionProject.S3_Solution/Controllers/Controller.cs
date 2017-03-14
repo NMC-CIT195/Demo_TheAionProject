@@ -147,6 +147,10 @@ namespace TheAionProject
                         _gameConsoleView.DisplayListOfSpaceTimeLocations();
                         break;
 
+                    case TravelerAction.ListTravelerObjects:
+                        _gameConsoleView.DisplayListOfTravelerObjects();
+                        break;
+
                     case TravelerAction.Exit:
                         _playingGame = false;
                         break;

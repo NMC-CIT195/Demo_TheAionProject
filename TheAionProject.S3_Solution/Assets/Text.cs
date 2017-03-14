@@ -210,7 +210,7 @@ namespace TheAionProject
                 // display table header
                 //
                 "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) +  "\n";
+                "---".PadRight(10) + "----------------------".PadRight(30) + "\n";
 
             //
             // display all locations
@@ -218,10 +218,10 @@ namespace TheAionProject
             string spaceTimeLocationList = null;
             foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
             {
-                    spaceTimeLocationList +=
-                        $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
-                        $"{spaceTimeLocation.CommonName}".PadRight(30) +
-                        Environment.NewLine;
+                spaceTimeLocationList +=
+                    $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
+                    $"{spaceTimeLocation.CommonName}".PadRight(30) +
+                    Environment.NewLine;
             }
 
             messageBoxText += spaceTimeLocationList;
@@ -258,8 +258,23 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string ListGameObjects(IEnumerable<GameObject> gameObjects)
+        public static string ListTravelerObjects(IEnumerable<GameObject> gameObjects)
         {
+            //
+            // generate a list of only traveler objects from the game object list
+            //
+            List<TravelerObject> travelerObjects = new List<TravelerObject>();
+            foreach (var gameObject in gameObjects)
+            {
+                if (gameObject.GetType() == typeof(TravelerObject))
+                {
+                    travelerObjects.Add(gameObject as TravelerObject);
+                }
+            }
+
+            //
+            // display table name and column headers
+            //
             string messageBoxText =
                 "Traveler Objects\n" +
                 " \n" +
@@ -271,21 +286,19 @@ namespace TheAionProject
                 "---".PadRight(10) + "----------------------".PadRight(30) + "----------------------".PadRight(20) + "\n";
 
             //
-            // display all traveler objects
+            // display all traveler objects in rows
             //
-            string travelerObject = null;
-
-
-            foreach (GameObject gameObject in gameObjects)
+            string travelerObjectRows = null;            
+            foreach (TravelerObject travelerObject in travelerObjects)
             {
-                gameObject +=
-                    $"{gameObject.Id}".PadRight(10) +
-                    $"{gameObject.Name}".PadRight(30) +
-                    $"{gameObject.}".PadRight(30) +
+                travelerObjectRows +=
+                    $"{travelerObject.Id}".PadRight(10) +
+                    $"{travelerObject.Name}".PadRight(30) +
+                    $"{travelerObject.Type}".PadRight(30) +
                     Environment.NewLine;
             }
 
-            messageBoxText += travelerObject;
+            messageBoxText += travelerObjectRows;
 
             return messageBoxText;
         }

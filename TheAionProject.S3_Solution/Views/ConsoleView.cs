@@ -603,6 +603,11 @@ namespace TheAionProject
             DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
+        public void DisplayListOfTravelerObjects()
+        {
+            DisplayGamePlayScreen("List: Traveler Objects", Text.ListTravelerObjects(_gameUniverse.GameObjects), ActionMenu.MainMenu, "");
+        }
+
         #endregion
 
         #endregion
