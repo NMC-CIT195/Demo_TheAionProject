@@ -141,7 +141,14 @@ namespace TheAionProject
 
                     case TravelerAction.TravelerLocationsVisited:
                         _gameConsoleView.DisplayLocationsVisited();
-                          break;
+                        break;
+
+                    case TravelerAction.LookAt:
+                        //
+                        // display a list of traveler objects in space-time location and get a player choice
+                        //
+                        int travelerObjectToLookAtId = _gameConsoleView.DisplayGetTravelerItemToLookAt();
+                        break;
 
                     case TravelerAction.ListSpaceTimeLocations:
                         _gameConsoleView.DisplayListOfSpaceTimeLocations();

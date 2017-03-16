@@ -303,6 +303,51 @@ namespace TheAionProject
             return messageBoxText;
         }
 
+        public static string ListTravelerObjects(IEnumerable<GameObject> gameObjects)
+        {
+            //
+            // generate a list of only traveler objects from the game object list
+            //
+            List<TravelerObject> travelerObjects = new List<TravelerObject>();
+            foreach (var gameObject in gameObjects)
+            {
+                if (gameObject.GetType() == typeof(TravelerObject))
+                {
+                    travelerObjects.Add(gameObject as TravelerObject);
+                }
+            }
+
+            //
+            // display table name and column headers
+            //
+            string messageBoxText =
+                "Traveler Objects\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) + "Name".PadRight(30) + "Type".PadRight(20) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) + "----------------------".PadRight(20) + "\n";
+
+            //
+            // display all traveler objects in rows
+            //
+            string travelerObjectRows = null;
+            foreach (TravelerObject travelerObject in travelerObjects)
+            {
+                travelerObjectRows +=
+                    $"{travelerObject.Id}".PadRight(10) +
+                    $"{travelerObject.Name}".PadRight(30) +
+                    $"{travelerObject.Type}".PadRight(30) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += travelerObjectRows;
+
+            return messageBoxText;
+        }
+
         #endregion
 
         public static List<string> StatusBox(Traveler traveler, Universe universe)

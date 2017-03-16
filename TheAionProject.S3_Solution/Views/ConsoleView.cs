@@ -584,6 +584,45 @@ namespace TheAionProject
             return spaceTimeLocationId;
         }
 
+        // todo current bookmark
+        public int DisplayGetTravelerItemToLookAt()
+        {
+            int travelerObjectId = 0;
+            bool validTravelerObjectId = false;
+
+            DisplayGamePlayScreen("Look at a Object", Text.LookAt(_gameTraveler, _gameUniverse.GameObjects), ActionMenu.MainMenu, "");
+
+            while (!validTravelerObjectId)
+            {
+                //
+                // get an integer from the player
+                //
+                GetInteger($"Enter your new location {_gameTraveler.Name}: ", 1, _gameUniverse.GetMaxSpaceTimeLocationId(), out travelerObjectId);
+
+                //
+                // validate integer as a valid space-time location id and determine accessibility
+                //
+                if (_gameUniverse.IsValidSpaceTravelerObjectId(spaceTimeLocationId))
+                {
+                    if (_gameUniverse.IsAccessibleLocation(spaceTimeLocationId))
+                    {
+                        validSpaceTimeLocationId = true;
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage("It appears you attempting to travel to an inaccessible location. Please try again.");
+                    }
+                }
+                else
+                {
+                    DisplayInputErrorMessage("It appears you entered an invalid Space-Time location id. Please try again.");
+                }
+            }
+
+            return spaceTimeLocationId;
+        }
+
         public void DisplayLocationsVisited()
         {
             //
