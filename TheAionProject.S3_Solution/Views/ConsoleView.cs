@@ -623,6 +623,10 @@ namespace TheAionProject
             int gameObjectId = 0;
             bool validGamerObjectId = false;
 
+            // todo bookmark John
+
+            List<GameObject> gameObjectsInSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
+
             DisplayGamePlayScreen("Look at a Object", Text.ListGameObjectsBySpaceTimeLocation(_gameTraveler.SpaceTimeLocationID, _gameUniverse.GameObjects), ActionMenu.MainMenu, "");
 
             while (!validGamerObjectId)
