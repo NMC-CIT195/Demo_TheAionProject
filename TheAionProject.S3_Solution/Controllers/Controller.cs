@@ -134,9 +134,9 @@ namespace TheAionProject
                         _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
 
                         //
-                        // set the game play screen to the current location info format
+                        // display the new space-time location info
                         //
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayCurrentLocationInfo();
                         break;
 
                     case TravelerAction.TravelerLocationsVisited:
@@ -147,15 +147,25 @@ namespace TheAionProject
                         //
                         // display a list of traveler objects in space-time location and get a player choice
                         //
-                        int travelerObjectToLookAtId = _gameConsoleView.DisplayGetTravelerItemToLookAt();
+                        int travelerObjectToLookAtId = _gameConsoleView.DisplayGetGameObjectToLookAt();
+
+                        //
+                        // get the game object from the universe
+                        //
+                        GameObject gameObject = _gameUniverse.GetGameObjectById(travelerObjectToLookAtId);
+
+                        //
+                        // display information for the object chosen
+                        //
+                        _gameConsoleView.DisplayGameObjectInfo(gameObject);
                         break;
 
                     case TravelerAction.ListSpaceTimeLocations:
                         _gameConsoleView.DisplayListOfSpaceTimeLocations();
                         break;
 
-                    case TravelerAction.ListTravelerObjects:
-                        _gameConsoleView.DisplayListOfTravelerObjects();
+                    case TravelerAction.ListGameObjects:
+                        _gameConsoleView.DisplayListOfGameObjects();
                         break;
 
                     case TravelerAction.Exit:

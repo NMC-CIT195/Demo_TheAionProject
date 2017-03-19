@@ -127,35 +127,51 @@ namespace TheAionProject
             return Console.ReadLine();
         }
 
-        /// <summary>
-        /// get an integer value from the user
-        /// </summary>
-        /// <returns>integer value</returns>
+       /// <summary>
+       /// get a valid integer from the player - note: if max and min values are both 0, range validation is disabled
+       /// </summary>
+       /// <param name="prompt">prompt message in console</param>
+       /// <param name="minimumValue">min. value</param>
+       /// <param name="maximumValue">max. value</param>
+       /// <param name="integerChoice">out value</param>
+       /// <returns></returns>
         private bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
         {
             bool validResponse = false;
             integerChoice = 0;
+
+            //
+            // validate on range if either minimumValue and maximumValue are not 0
+            //
+            bool validateRange = (minimumValue != 0 || maximumValue != 0);
 
             DisplayInputBoxPrompt(prompt);
             while (!validResponse)
             {
                 if (int.TryParse(Console.ReadLine(), out integerChoice))
                 {
-                    if (integerChoice >= minimumValue && integerChoice <= maximumValue)
+                    if (validateRange)
                     {
-                        validResponse = true;
+                        if (integerChoice >= minimumValue && integerChoice <= maximumValue)
+                        {
+                            validResponse = true;
+                        }
+                        else
+                        {
+                            ClearInputBox();
+                            DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                            DisplayInputBoxPrompt(prompt);
+                        }
                     }
                     else
                     {
-                        ClearInputBox();
-                        DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
-                        DisplayInputBoxPrompt(prompt);
+                        validResponse = true;
                     }
                 }
                 else
                 {
                     ClearInputBox();
-                    DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                    DisplayInputErrorMessage($"You must enter an integer value. Please try again.");
                     DisplayInputBoxPrompt(prompt);
                 }
             }
@@ -542,8 +558,26 @@ namespace TheAionProject
 
         public void DisplayLookAround()
         {
+            //
+            // get current space-time location
+            //
             SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
-            DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
+
+            //
+            // get list of game objects in current space-time location
+            //
+            List<GameObject> gameObjects = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
+
+            string messageBoxText = Text.LookAround(currentSpaceTimeLocation);
+            //messageBoxText += Text.ListTravelerObjectsBySpaceTimeLocation(gameObjects);
+           // messageBoxText += Text.ListSpaceTimeLocationObjectsBySpaceTimeLocation(gameObjects);
+
+            DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
+        }
+
+        public void DisplayGameObjectInfo(GameObject gameObject)
+        {
+           DisplayGamePlayScreen("Current Location", Text.LookAt(gameObject), ActionMenu.MainMenu, "");
         }
 
         public int DisplayGetNextSpaceTimeLocation()
@@ -577,50 +611,42 @@ namespace TheAionProject
                 }
                 else
                 {
-                    DisplayInputErrorMessage("It appears you entered an invalid Space-Time location id. Please try again.");
+                    DisplayInputErrorMessage("It appears you entered an invalid Space-Time Location id. Please try again.");
                 }
             }
 
             return spaceTimeLocationId;
         }
 
-        // todo current bookmark
-        public int DisplayGetTravelerItemToLookAt()
+        public int DisplayGetGameObjectToLookAt()
         {
-            int travelerObjectId = 0;
-            bool validTravelerObjectId = false;
+            int gameObjectId = 0;
+            bool validGamerObjectId = false;
 
-            DisplayGamePlayScreen("Look at a Object", Text.LookAt(_gameTraveler, _gameUniverse.GameObjects), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Look at a Object", Text.ListGameObjectsBySpaceTimeLocation(_gameTraveler.SpaceTimeLocationID, _gameUniverse.GameObjects), ActionMenu.MainMenu, "");
 
-            while (!validTravelerObjectId)
+            while (!validGamerObjectId)
             {
                 //
                 // get an integer from the player
                 //
-                GetInteger($"Enter your new location {_gameTraveler.Name}: ", 1, _gameUniverse.GetMaxSpaceTimeLocationId(), out travelerObjectId);
+                GetInteger($"Enter the Id number of the object you wish to look at: ", 0, 0, out gameObjectId);
 
                 //
-                // validate integer as a valid space-time location id and determine accessibility
+                // validate integer as a valid game object id and in current location
                 //
-                if (_gameUniverse.IsValidSpaceTravelerObjectId(spaceTimeLocationId))
+                if (_gameUniverse.IsValidGameObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
                 {
-                    if (_gameUniverse.IsAccessibleLocation(spaceTimeLocationId))
-                    {
-                        validSpaceTimeLocationId = true;
-                    }
-                    else
-                    {
-                        ClearInputBox();
-                        DisplayInputErrorMessage("It appears you attempting to travel to an inaccessible location. Please try again.");
-                    }
+                    validGamerObjectId = true;
                 }
                 else
                 {
-                    DisplayInputErrorMessage("It appears you entered an invalid Space-Time location id. Please try again.");
+                    ClearInputBox();
+                    DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
                 }
             }
 
-            return spaceTimeLocationId;
+            return gameObjectId;
         }
 
         public void DisplayLocationsVisited()
@@ -642,9 +668,9 @@ namespace TheAionProject
             DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
-        public void DisplayListOfTravelerObjects()
+        public void DisplayListOfGameObjects()
         {
-            DisplayGamePlayScreen("List: Traveler Objects", Text.ListTravelerObjects(_gameUniverse.GameObjects), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("List: Game Objects", Text.ListGameObjects(_gameUniverse.GameObjects), ActionMenu.MainMenu, "");
         }
 
         #endregion

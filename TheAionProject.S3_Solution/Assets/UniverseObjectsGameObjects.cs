@@ -57,7 +57,7 @@ namespace TheAionProject
                 Id = 4,
                 Name = "Norlan Document ND-3075",
                 SpaceTimeLocationId = 3,
-                Description = 
+                Description =
                     "Memo: Origin Errata" + "/n" +
                     "Universal Date: 378598" + "/n" +
                     "/n" +
@@ -67,6 +67,24 @@ namespace TheAionProject
                 CanInventory = true,
                 IsConsumable = false,
                 IsVisible = true
+            },
+
+            new SpaceTimeLocationObject
+            {
+                Id = 5,
+                Name = "Boldendorian Chest",
+                SpaceTimeLocationId = 2,
+                Description = "A large wooden chest adorned with jewels.",
+                IsDeadly = true
+            },
+
+            new SpaceTimeLocationObject
+            {
+                Id = 6,
+                Name = "Silver Mirror",
+                SpaceTimeLocationId = 2,
+                Description = "A small silver mirror hanging on the wall next to a small window.",
+                IsDeadly = true
             }
         };
     }

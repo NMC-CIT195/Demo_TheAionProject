@@ -134,9 +134,9 @@ namespace TheAionProject
                         _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
 
                         //
-                        // set the game play screen to the current location info format
+                        // display the new space-time location info
                         //
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayCurrentLocationInfo();
                         break;
 
                     case TravelerAction.TravelerLocationsVisited:

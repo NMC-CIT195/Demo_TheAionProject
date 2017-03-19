@@ -55,9 +55,10 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Enums\TravelerObjectType.cs" />
     <Compile Include="Models\GameObject.cs" />
+    <Compile Include="Models\SpaceTimeLocationObject.cs" />
     <Compile Include="Models\TravelerObject.cs" />
     <Compile Include="Models\Menu.cs" />
-    <Compile Include="Models\SpaceTimeLocation.cs" />
+    <Compile Include="Views\SpaceTimeLocation.cs" />
     <Compile Include="Models\Traveler.cs" />
     <Compile Include="Models\Enums\TravelerAction.cs" />
     <Compile Include="Models\Universe.cs" />

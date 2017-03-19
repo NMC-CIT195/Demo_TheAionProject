@@ -258,62 +258,51 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string ListTravelerObjects(IEnumerable<GameObject> gameObjects)
+        public static string ListGameObjects(IEnumerable<GameObject> gameObjects)
         {
-            //
-            // generate a list of only traveler objects from the game object list
-            //
-            List<TravelerObject> travelerObjects = new List<TravelerObject>();
-            foreach (var gameObject in gameObjects)
-            {
-                if (gameObject.GetType() == typeof(TravelerObject))
-                {
-                    travelerObjects.Add(gameObject as TravelerObject);
-                }
-            }
-
             //
             // display table name and column headers
             //
             string messageBoxText =
-                "Traveler Objects\n" +
+                "Game Objects\n" +
                 " \n" +
 
                 //
                 // display table header
                 //
                 "ID".PadRight(10) + "Name".PadRight(30) + "Type".PadRight(20) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) + "----------------------".PadRight(20) + "\n";
+                "---".PadRight(10) + "----------------------".PadRight(30) +
+                "----------------------".PadRight(20) + "\n";
 
             //
             // display all traveler objects in rows
             //
-            string travelerObjectRows = null;            
-            foreach (TravelerObject travelerObject in travelerObjects)
+            string gameObjectRows = null;
+            foreach (GameObject gameObject in gameObjects)
             {
-                travelerObjectRows +=
-                    $"{travelerObject.Id}".PadRight(10) +
-                    $"{travelerObject.Name}".PadRight(30) +
-                    $"{travelerObject.Type}".PadRight(30) +
+                gameObjectRows +=
+                    $"{gameObject.Id}".PadRight(10) +
+                    $"{gameObject.Name}".PadRight(30) +
                     Environment.NewLine;
             }
 
-            messageBoxText += travelerObjectRows;
+            messageBoxText += gameObjectRows;
 
             return messageBoxText;
         }
 
-        public static string ListTravelerObjects(IEnumerable<GameObject> gameObjects)
+        // todo decide who does the id filter john
+        public static string ListGameObjectsBySpaceTimeLocation(int spaceTimeLocationId, IEnumerable<GameObject> gameObjects)
         {
             //
-            // generate a list of only traveler objects from the game object list
+            // generate a list of traveler objects from the game object list with the current space-time location id
             //
-            List<TravelerObject> travelerObjects = new List<TravelerObject>();
+            List<GameObject> gameObjectsInLocation = new List<GameObject>();
             foreach (var gameObject in gameObjects)
             {
-                if (gameObject.GetType() == typeof(TravelerObject))
+                if (gameObject.SpaceTimeLocationId == spaceTimeLocationId)
                 {
-                    travelerObjects.Add(gameObject as TravelerObject);
+                    gameObjectsInLocation.Add(gameObject);
                 }
             }
 
@@ -321,29 +310,108 @@ namespace TheAionProject
             // display table name and column headers
             //
             string messageBoxText =
-                "Traveler Objects\n" +
+                "Game Objects\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) +
+                "\n";
+
+            //
+            // display all traveler objects in rows
+            //
+            string gameObjectRows = null;
+            foreach (GameObject gameObject in gameObjectsInLocation)
+            {
+                gameObjectRows +=
+                    $"{gameObject.Id}".PadRight(10) +
+                    $"{gameObject.Name}".PadRight(30) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += gameObjectRows;
+
+            return messageBoxText;
+        }
+
+        public static string ListSpaceTimeLocationObjectsBySpaceTimeLocation(int spaceTimeLocationId, IEnumerable<GameObject> gameObjects)
+        {
+            //
+            // generate a list of traveler objects from the game object list with the current space-time location id
+            //
+            List<SpaceTimeLocationObject> spaceTimeLocationObjects = new List<SpaceTimeLocationObject>();
+            foreach (var gameObject in gameObjects)
+            {
+                if (gameObject is TravelerObject &&
+                    gameObject.SpaceTimeLocationId == spaceTimeLocationId)
+                {
+                    spaceTimeLocationObjects.Add(gameObject as SpaceTimeLocationObject);
+                }
+            }
+
+            //
+            // display table name and column headers
+            //
+            string messageBoxText =
+                "Space-Time Location Objects\n" +
                 " \n" +
 
                 //
                 // display table header
                 //
                 "ID".PadRight(10) + "Name".PadRight(30) + "Type".PadRight(20) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) + "----------------------".PadRight(20) + "\n";
+                "---".PadRight(10) + "----------------------".PadRight(30) +
+                "----------------------".PadRight(20) + "\n";
 
             //
             // display all traveler objects in rows
             //
-            string travelerObjectRows = null;
-            foreach (TravelerObject travelerObject in travelerObjects)
+            string spaceTimeLocationObjectRows = null;
+            foreach (SpaceTimeLocationObject spaceTimeLocationObject in spaceTimeLocationObjects)
             {
-                travelerObjectRows +=
-                    $"{travelerObject.Id}".PadRight(10) +
-                    $"{travelerObject.Name}".PadRight(30) +
-                    $"{travelerObject.Type}".PadRight(30) +
+                spaceTimeLocationObjectRows +=
+                    $"{spaceTimeLocationObject.Id}".PadRight(10) +
+                    $"{spaceTimeLocationObject.Name}".PadRight(30) +
                     Environment.NewLine;
             }
 
-            messageBoxText += travelerObjectRows;
+            messageBoxText += spaceTimeLocationObjectRows;
+
+            return messageBoxText;
+        }
+
+        public static string LookAt(GameObject gameObject)
+        {
+            string messageBoxText = "";
+
+            messageBoxText =
+                $"{gameObject.Name}\n" +
+                " \n" +
+                gameObject.Description + " \n" +
+                " \n";
+                
+            if (gameObject is TravelerObject)
+            {
+                TravelerObject travelerObject = gameObject as TravelerObject;
+
+                messageBoxText += $"The {travelerObject.Name} has a value of {travelerObject.Value} and ";
+
+                if (travelerObject.CanInventory)
+                {
+                    messageBoxText += "may be added to your inventory.";
+                }
+                else
+                {
+                    messageBoxText += "may not be added to your inventory.";
+                }
+            }
+            else
+            {
+                messageBoxText += $"The {gameObject.Name} may not be added to your inventory.";
+            }
 
             return messageBoxText;
         }

@@ -94,30 +94,30 @@ namespace TheAionProject
         }
 
         /// <summary>
-        /// validate traveler object id number
+        /// validate game object id number in current location
         /// </summary>
-        /// <param name="travelerObjectId"></param>
+        /// <param name="gameObjectId"></param>
         /// <returns>is Id valid</returns>
-        public bool IsValidTravelerObjectId(int travelerObjectId)
+        public bool IsValidGameObjectByLocationId(int gameObjectId, int currentSpaceTimeLocation)
         {
-            List<int> travelerObjectIds = new List<int>();
+            List<int> gameObjectIds = new List<int>();
 
             //
-            // create a list of traveler object ids
+            // create a list of game object ids in current space-time location
             //
             foreach (GameObject gameObject in _gameObjects)
             {
-                if (gameObject is TravelerObject)
+                if (gameObject.SpaceTimeLocationId == currentSpaceTimeLocation)
                 {
-                    travelerObjectIds.Add(gameObject.Id);
+                    gameObjectIds.Add(gameObject.Id);
                 }
 
             }
 
             //
-            // determine if the traveler object id is a valid id and return the result
+            // determine if the game object id is a valid id and return the result
             //
-            if (travelerObjectIds.Contains(travelerObjectId))
+            if (gameObjectIds.Contains(gameObjectId))
             {
                 return true;
             }
@@ -146,9 +146,9 @@ namespace TheAionProject
         }
 
         /// <summary>
-        /// return the next available ID for a SpaceTimeLocation object
+        /// return the current maximum ID for a SpaceTimeLocation object
         /// </summary>
-        /// <returns>next SpaceTimeLocationObjectID </returns>
+        /// <returns>max SpaceTimeLocationObjectID </returns>
         public int GetMaxSpaceTimeLocationId()
         {
             int MaxId = 0;
@@ -195,6 +195,25 @@ namespace TheAionProject
             }
 
             return spaceTimeLocation;
+        }
+
+        /// <summary>
+        /// return the maximum ID for a GameObject object
+        /// </summary>
+        /// <returns>max GameObjectID </returns>
+        public int GetMaxGameObjectId()
+        {
+            int MaxId = 0;
+
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.Id > MaxId)
+                {
+                    MaxId = gameObject.Id;
+                }
+            }
+
+            return MaxId;
         }
 
         /// <summary>
