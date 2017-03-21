@@ -69,11 +69,13 @@ namespace TheAionProject
         public Traveler()
         {
             _spaceTimeLocationsVisited = new List<int>();
+            _inventory = new List<TravelerObject>();
         }
 
         public Traveler(string name, RaceType race, int spaceTimeLocationID) : base(name, race, spaceTimeLocationID)
         {
             _spaceTimeLocationsVisited = new List<int>();
+            _inventory = new List<TravelerObject>();
         }
 
         #endregion

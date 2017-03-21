@@ -240,7 +240,7 @@ namespace TheAionProject
             //
             // display a list of traveler objects in space-time location and get a player choice
             //
-            int travelerObjectToPickUpId = _gameConsoleView.DisplayGetGameObjectToPickUp();
+            int travelerObjectToPickUpId = _gameConsoleView.DisplayGetTravelerObjectToPickUp();
 
             //
             // add the traveler object to traveler's inventory

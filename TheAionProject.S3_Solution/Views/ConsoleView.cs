@@ -661,33 +661,42 @@ namespace TheAionProject
         }
 
 
-        public int DisplayGetGameObjectToPickUp()
+        public int DisplayGetTravelerObjectToPickUp()
         {
             int gameObjectId = 0;
             bool validGamerObjectId = false;
 
             //
-            // get a list of game objects in the current space-time location
+            // get a list of traveler objects in the current space-time location
             //
-            List<GameObject> gameObjectsInSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
+            List<TravelerObject> travelerObjectsInSpaceTimeLocation = _gameUniverse.GetTravelerObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
 
-            if (gameObjectsInSpaceTimeLocation.Count > 0)
+            if (travelerObjectsInSpaceTimeLocation.Count > 0)
             {
-                DisplayGamePlayScreen("Look at a Object", Text.GameObjectsChooseList(gameObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
+                DisplayGamePlayScreen("Pick Up Game Object", Text.GameObjectsChooseList(travelerObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
 
                 while (!validGamerObjectId)
                 {
                     //
                     // get an integer from the player
                     //
-                    GetInteger($"Enter the Id number of the object you wish to look at: ", 0, 0, out gameObjectId);
+                    GetInteger($"Enter the Id number of the object you wish to add to your inventory: ", 0, 0, out gameObjectId);
 
                     //
                     // validate integer as a valid game object id and in current location
                     //
-                    if (_gameUniverse.IsValidGameObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
+                    if (_gameUniverse.IsValidTravelerObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
                     {
-                        validGamerObjectId = true;
+                        TravelerObject travelerObject = _gameUniverse.GetGameObjectById(gameObjectId) as TravelerObject;
+                        if (travelerObject.CanInventory)
+                        {
+                            validGamerObjectId = true;
+                        }
+                        else
+                        {
+                            ClearInputBox();
+                            DisplayInputErrorMessage("It appears you may not inventory that object. Please try again.");
+                        }
                     }
                     else
                     {

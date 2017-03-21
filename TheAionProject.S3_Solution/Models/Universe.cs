@@ -56,7 +56,7 @@ namespace TheAionProject
         private void IntializeUniverse()
         {
             _spaceTimeLocations = UniverseObjects.SpaceTimeLocations;
-            _gameObjects = UniverseObjects.gameObjects;
+            _gameObjects = UniverseObjects.gameObjects;            
         }
 
         #endregion
@@ -118,6 +118,40 @@ namespace TheAionProject
             // determine if the game object id is a valid id and return the result
             //
             if (gameObjectIds.Contains(gameObjectId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// validate traveler object id number in current location
+        /// </summary>
+        /// <param name="travelerObjectId"></param>
+        /// <returns>is Id valid</returns>
+        public bool IsValidTravelerObjectByLocationId(int travelerObjectId, int currentSpaceTimeLocation)
+        {
+            List<int> travelerObjectIds = new List<int>();
+
+            //
+            // create a list of traveler object ids in current space-time location
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == currentSpaceTimeLocation && gameObject is TravelerObject)
+                {
+                    travelerObjectIds.Add(gameObject.Id);
+                }
+
+            }
+
+            //
+            // determine if the game object id is a valid id and return the result
+            //
+            if (travelerObjectIds.Contains(travelerObjectId))
             {
                 return true;
             }
@@ -265,6 +299,24 @@ namespace TheAionProject
             }
 
             return gameObjects;
+        }
+
+        public List<TravelerObject> GetTravelerObjectsBySpaceTimeLocationId(int spaceTimeLocationId)
+        {
+            List<TravelerObject> travelerObjects = new List<TravelerObject>();
+
+            //
+            // run through the game object list and grab all that are in the current space-time location
+            //
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == spaceTimeLocationId && gameObject is TravelerObject)
+                {
+                    travelerObjects.Add(gameObject as TravelerObject);
+                }
+            }
+
+            return travelerObjects;
         }
 
         #endregion
