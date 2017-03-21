@@ -229,7 +229,7 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string ListSpaceTimeLocations(IEnumerable<SpaceTimeLocation> spaceTimeLocations)
+        public static string ListAllSpaceTimeLocations(IEnumerable<SpaceTimeLocation> spaceTimeLocations)
         {
             string messageBoxText =
                 "Space-Time Locations\n" +
@@ -258,7 +258,7 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string ListGameObjects(IEnumerable<GameObject> gameObjects)
+        public static string ListAllGameObjects(IEnumerable<GameObject> gameObjects)
         {
             //
             // display table name and column headers
@@ -270,9 +270,12 @@ namespace TheAionProject
                 //
                 // display table header
                 //
-                "ID".PadRight(10) + "Name".PadRight(30) + "Type".PadRight(20) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) +
-                "----------------------".PadRight(20) + "\n";
+                "ID".PadRight(10) +
+                "Name".PadRight(30) +
+                "Space-Time Location Id".PadRight(10) + "\n" +
+                "---".PadRight(10) +
+                "----------------------".PadRight(30) +
+                "----------------------".PadRight(10) + "\n";
 
             //
             // display all traveler objects in rows
@@ -283,6 +286,7 @@ namespace TheAionProject
                 gameObjectRows +=
                     $"{gameObject.Id}".PadRight(10) +
                     $"{gameObject.Name}".PadRight(30) +
+                    $"{gameObject.SpaceTimeLocationId}".PadRight(10) +
                     Environment.NewLine;
             }
 
@@ -291,21 +295,8 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        // todo decide who does the id filter john
-        public static string ListGameObjectsBySpaceTimeLocation(int spaceTimeLocationId, IEnumerable<GameObject> gameObjects)
+        public static string GameObjectsChooseList(IEnumerable<GameObject> gameObjects)
         {
-            //
-            // generate a list of traveler objects from the game object list with the current space-time location id
-            //
-            List<GameObject> gameObjectsInLocation = new List<GameObject>();
-            foreach (var gameObject in gameObjects)
-            {
-                if (gameObject.SpaceTimeLocationId == spaceTimeLocationId)
-                {
-                    gameObjectsInLocation.Add(gameObject);
-                }
-            }
-
             //
             // display table name and column headers
             //
@@ -316,19 +307,21 @@ namespace TheAionProject
                 //
                 // display table header
                 //
-                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) +
-                "\n";
+                "ID".PadRight(10) + 
+                "Name".PadRight(30) + "\n" +
+                "---".PadRight(10) + 
+                "----------------------".PadRight(30) + "\n";
 
             //
             // display all traveler objects in rows
             //
             string gameObjectRows = null;
-            foreach (GameObject gameObject in gameObjectsInLocation)
+            foreach (GameObject gameObject in gameObjects)
             {
                 gameObjectRows +=
                     $"{gameObject.Id}".PadRight(10) +
                     $"{gameObject.Name}".PadRight(30) +
+                    $"{gameObject.SpaceTimeLocationId}".PadRight(10) +
                     Environment.NewLine;
             }
 
@@ -336,6 +329,7 @@ namespace TheAionProject
 
             return messageBoxText;
         }
+
 
         public static string ListSpaceTimeLocationObjectsBySpaceTimeLocation(int spaceTimeLocationId, IEnumerable<GameObject> gameObjects)
         {

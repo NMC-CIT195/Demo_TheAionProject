@@ -108,7 +108,15 @@ namespace TheAionProject
                 //
                 // get next game action from player
                 //
-                travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
+                if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MainMenu)
+                {
+                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
+                }
+                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.AdminMenu)
+                {
+                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.AdminMenu);
+                }
+
 
                 //
                 // choose an action based on the player's menu choice
@@ -127,16 +135,7 @@ namespace TheAionProject
                         break;
 
                     case TravelerAction.Travel:
-                        //
-                        // get new location choice and update the current location property
-                        //                        
-                        _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
-                        _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
-
-                        //
-                        // display the new space-time location info
-                        //
-                        _gameConsoleView.DisplayCurrentLocationInfo();
+                        TravelAction();
                         break;
 
                     case TravelerAction.TravelerLocationsVisited:
@@ -144,20 +143,15 @@ namespace TheAionProject
                         break;
 
                     case TravelerAction.LookAt:
-                        //
-                        // display a list of traveler objects in space-time location and get a player choice
-                        //
-                        int travelerObjectToLookAtId = _gameConsoleView.DisplayGetGameObjectToLookAt();
+                        LookAtAction();
+                        break;
 
-                        //
-                        // get the game object from the universe
-                        //
-                        GameObject gameObject = _gameUniverse.GetGameObjectById(travelerObjectToLookAtId);
+                    case TravelerAction.PickUp:
+                        PickUpAction();
+                        break;
 
-                        //
-                        // display information for the object chosen
-                        //
-                        _gameConsoleView.DisplayGameObjectInfo(gameObject);
+                    case TravelerAction.PutDown:
+                        //PutDownAction();
                         break;
 
                     case TravelerAction.ListSpaceTimeLocations:
@@ -165,7 +159,17 @@ namespace TheAionProject
                         break;
 
                     case TravelerAction.ListGameObjects:
-                        _gameConsoleView.DisplayListOfGameObjects();
+                        _gameConsoleView.DisplayListOfAllGameObjects();
+                        break;
+
+                    case TravelerAction.AdminMenu:
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                        _gameConsoleView.DisplayGamePlayScreen("Admin Menu", "Select an operation from the menu.", ActionMenu.AdminMenu, "");
+                        break;
+
+                    case TravelerAction.ReturnToMainMenu:
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
                         break;
 
                     case TravelerAction.Exit:
@@ -181,6 +185,79 @@ namespace TheAionProject
             // close the application
             //
             Environment.Exit(1);
+        }
+
+        /// <summary>
+        /// process the Travel action
+        /// </summary>
+        private void TravelAction()
+        {
+            //
+            // get new location choice and update the current location property
+            //                        
+            _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
+
+            //
+            // display the new space-time location info
+            //
+            _gameConsoleView.DisplayCurrentLocationInfo();
+        }
+
+        /// <summary>
+        /// process the Look At action
+        /// </summary>
+        private void LookAtAction()
+        {
+            //
+            // display a list of game objects in space-time location and get a player choice
+            //
+            int gameObjectToLookAtId = _gameConsoleView.DisplayGetGameObjectToLookAt();
+
+            //
+            // display game object info
+            //
+            if (gameObjectToLookAtId != 0)
+            {
+                //
+                // get the game object from the universe
+                //
+                GameObject gameObject = _gameUniverse.GetGameObjectById(gameObjectToLookAtId);
+
+                //
+                // display information for the object chosen
+                //
+                _gameConsoleView.DisplayGameObjectInfo(gameObject);
+            }
+        }
+
+
+        /// <summary>
+        /// process the Pick Up action
+        /// </summary>
+        private void PickUpAction()
+        {
+            //
+            // display a list of traveler objects in space-time location and get a player choice
+            //
+            int travelerObjectToPickUpId = _gameConsoleView.DisplayGetGameObjectToPickUp();
+
+            //
+            // add the traveler object to traveler's inventory
+            //
+            if (travelerObjectToPickUpId != 0)
+            {
+                //
+                // get the game object from the universe
+                //
+                TravelerObject travelerObject = _gameUniverse.GetGameObjectById(travelerObjectToPickUpId) as TravelerObject;
+
+                //
+                // note: traveler object is added to list and the space-time location is set to 0
+                //
+                _gameTraveler.Inventory.Add(travelerObject);
+                travelerObject.SpaceTimeLocationId = 0;
+            }
         }
 
         /// <summary>

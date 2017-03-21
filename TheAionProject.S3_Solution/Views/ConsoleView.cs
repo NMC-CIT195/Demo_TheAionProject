@@ -127,14 +127,14 @@ namespace TheAionProject
             return Console.ReadLine();
         }
 
-       /// <summary>
-       /// get a valid integer from the player - note: if max and min values are both 0, range validation is disabled
-       /// </summary>
-       /// <param name="prompt">prompt message in console</param>
-       /// <param name="minimumValue">min. value</param>
-       /// <param name="maximumValue">max. value</param>
-       /// <param name="integerChoice">out value</param>
-       /// <returns></returns>
+        /// <summary>
+        /// get a valid integer from the player - note: if max and min values are both 0, range validation is disabled
+        /// </summary>
+        /// <param name="prompt">prompt message in console</param>
+        /// <param name="minimumValue">min. value</param>
+        /// <param name="maximumValue">max. value</param>
+        /// <param name="integerChoice">out value</param>
+        /// <returns></returns>
         private bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
         {
             bool validResponse = false;
@@ -566,18 +566,17 @@ namespace TheAionProject
             //
             // get list of game objects in current space-time location
             //
-            List<GameObject> gameObjects = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
+            List<GameObject> gameObjectsInCurrentSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
 
-            string messageBoxText = Text.LookAround(currentSpaceTimeLocation);
-            //messageBoxText += Text.ListTravelerObjectsBySpaceTimeLocation(gameObjects);
-           // messageBoxText += Text.ListSpaceTimeLocationObjectsBySpaceTimeLocation(gameObjects);
+            string messageBoxText = Text.LookAround(currentSpaceTimeLocation) + Environment.NewLine + Environment.NewLine;
+            messageBoxText += Text.GameObjectsChooseList(gameObjectsInCurrentSpaceTimeLocation);
 
             DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
         }
 
         public void DisplayGameObjectInfo(GameObject gameObject)
         {
-           DisplayGamePlayScreen("Current Location", Text.LookAt(gameObject), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Current Location", Text.LookAt(gameObject), ActionMenu.MainMenu, "");
         }
 
         public int DisplayGetNextSpaceTimeLocation()
@@ -623,31 +622,83 @@ namespace TheAionProject
             int gameObjectId = 0;
             bool validGamerObjectId = false;
 
-            // todo bookmark John
-
+            //
+            // get a list of game objects in the current space-time location
+            //
             List<GameObject> gameObjectsInSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
 
-            DisplayGamePlayScreen("Look at a Object", Text.ListGameObjectsBySpaceTimeLocation(_gameTraveler.SpaceTimeLocationID, _gameUniverse.GameObjects), ActionMenu.MainMenu, "");
-
-            while (!validGamerObjectId)
+            if (gameObjectsInSpaceTimeLocation.Count > 0)
             {
-                //
-                // get an integer from the player
-                //
-                GetInteger($"Enter the Id number of the object you wish to look at: ", 0, 0, out gameObjectId);
+                DisplayGamePlayScreen("Look at a Object", Text.GameObjectsChooseList(gameObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
 
-                //
-                // validate integer as a valid game object id and in current location
-                //
-                if (_gameUniverse.IsValidGameObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
+                while (!validGamerObjectId)
                 {
-                    validGamerObjectId = true;
+                    //
+                    // get an integer from the player
+                    //
+                    GetInteger($"Enter the Id number of the object you wish to look at: ", 0, 0, out gameObjectId);
+
+                    //
+                    // validate integer as a valid game object id and in current location
+                    //
+                    if (_gameUniverse.IsValidGameObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
+                    {
+                        validGamerObjectId = true;
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
+                    }
                 }
-                else
+            }
+            else
+            {
+                DisplayGamePlayScreen("Look at a Object", "It appears there are no game objects here.", ActionMenu.MainMenu, "");
+            }
+
+            return gameObjectId;
+        }
+
+
+        public int DisplayGetGameObjectToPickUp()
+        {
+            int gameObjectId = 0;
+            bool validGamerObjectId = false;
+
+            //
+            // get a list of game objects in the current space-time location
+            //
+            List<GameObject> gameObjectsInSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
+
+            if (gameObjectsInSpaceTimeLocation.Count > 0)
+            {
+                DisplayGamePlayScreen("Look at a Object", Text.GameObjectsChooseList(gameObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
+
+                while (!validGamerObjectId)
                 {
-                    ClearInputBox();
-                    DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
+                    //
+                    // get an integer from the player
+                    //
+                    GetInteger($"Enter the Id number of the object you wish to look at: ", 0, 0, out gameObjectId);
+
+                    //
+                    // validate integer as a valid game object id and in current location
+                    //
+                    if (_gameUniverse.IsValidGameObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
+                    {
+                        validGamerObjectId = true;
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
+                    }
                 }
+            }
+            else
+            {
+                DisplayGamePlayScreen("Look at a Object", "It appears there are no game objects here.", ActionMenu.MainMenu, "");
             }
 
             return gameObjectId;
@@ -669,12 +720,12 @@ namespace TheAionProject
 
         public void DisplayListOfSpaceTimeLocations()
         {
-            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListAllSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.AdminMenu, "");
         }
 
-        public void DisplayListOfGameObjects()
+        public void DisplayListOfAllGameObjects()
         {
-            DisplayGamePlayScreen("List: Game Objects", Text.ListGameObjects(_gameUniverse.GameObjects), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("List: Game Objects", Text.ListAllGameObjects(_gameUniverse.GameObjects), ActionMenu.AdminMenu, "");
         }
 
         #endregion

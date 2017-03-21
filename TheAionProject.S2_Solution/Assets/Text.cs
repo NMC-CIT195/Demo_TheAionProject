@@ -229,7 +229,7 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string ListSpaceTimeLocations(IEnumerable<SpaceTimeLocation> spaceTimeLocations)
+        public static string ListAllSpaceTimeLocations(IEnumerable<SpaceTimeLocation> spaceTimeLocations)
         {
             string messageBoxText =
                 "Space-Time Locations\n" +

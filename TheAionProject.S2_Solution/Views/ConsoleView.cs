@@ -600,7 +600,7 @@ namespace TheAionProject
 
         public void DisplayListOfSpaceTimeLocations()
         {
-            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListAllSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
         #endregion

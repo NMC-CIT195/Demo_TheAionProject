@@ -22,6 +22,8 @@ namespace TheAionProject
         private int _health;
         private int _lives;
         private List<int> _spaceTimeLocationsVisited;
+        private List<TravelerObject> _inventory;
+
 
         #endregion
 
@@ -51,6 +53,13 @@ namespace TheAionProject
             get { return _spaceTimeLocationsVisited; }
             set { _spaceTimeLocationsVisited = value; }
         }
+        
+        public List<TravelerObject> Inventory
+        {
+            get { return _inventory; }
+            set { _inventory = value; }
+        }
+
 
         #endregion
 

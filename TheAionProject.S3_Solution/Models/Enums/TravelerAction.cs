@@ -15,18 +15,16 @@ namespace TheAionProject
         MissionSetup,
         LookAround,
         LookAt,
-        PickUpItem,
-        PickUpTreasure,
-        PutDownItem,
-        PutDownTreasure,
+        PickUp,
+        PutDown,
+        Inventory,
         Travel,
         TravelerInfo,
-        TravelerInventory,
-        TravelerTreasure,
         TravelerLocationsVisited,
         ListSpaceTimeLocations,
         ListGameObjects,
-        ListTreasures,
+        AdminMenu,
+        ReturnToMainMenu,
         Exit
     }
 }

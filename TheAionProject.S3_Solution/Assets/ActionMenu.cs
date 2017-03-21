@@ -11,6 +11,16 @@ namespace TheAionProject
     /// </summary>
     public static class ActionMenu
     {
+        public enum CurrentMenu
+        {
+            MissionIntro,
+            InitializeMission,
+            MainMenu,
+            AdminMenu
+        }
+
+        public static CurrentMenu currentMenu = CurrentMenu.MainMenu;
+
         public static Menu MissionIntro = new Menu()
         {
             MenuName = "MissionIntro",
@@ -40,24 +50,26 @@ namespace TheAionProject
                     { '1', TravelerAction.TravelerInfo },
                     { '2', TravelerAction.LookAround },
                     { '3', TravelerAction.LookAt },
-                    { '4', TravelerAction.Travel },
-                    { '5', TravelerAction.TravelerLocationsVisited },
-                    { '6', TravelerAction.ListSpaceTimeLocations },
-                    { '7', TravelerAction.ListGameObjects},
+                    { '4', TravelerAction.PickUp },
+                    { '5', TravelerAction.PutDown },
+                    { '6', TravelerAction.Travel },
+                    { '7', TravelerAction.TravelerLocationsVisited },
+                    { '8', TravelerAction.AdminMenu },
                     { '0', TravelerAction.Exit }
                 }
         };
 
-        //public static Menu ManageTraveler = new Menu()
-        //{
-        //    MenuName = "ManageTraveler",
-        //    MenuTitle = "Manage Traveler",
-        //    MenuChoices = new Dictionary<char, TravelerAction>()
-        //            {
-        //                TravelerAction.MissionSetup,
-        //                TravelerAction.TravelerInfo,
-        //                TravelerAction.Exit
-        //            }
-        //};
+        public static Menu AdminMenu = new Menu()
+        {
+            MenuName = "AdminMenu",
+            MenuTitle = "Admin Menu",
+            MenuChoices = new Dictionary<char, TravelerAction>()
+                {
+                    { '1', TravelerAction.ListSpaceTimeLocations },
+                    { '2', TravelerAction.ListGameObjects},
+                    { '0', TravelerAction.ReturnToMainMenu }
+                }
+        };
+
     }
 }
