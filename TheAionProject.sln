@@ -8,13 +8,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S2_Solution", "TheAionProject.S2_Solution\TheAionProject.S2_Solution.csproj", "{E3113AA9-D8A6-4990-8DFE-C20DAC0E21AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{EA97269A-E209-4BD6-88B8-9F97CFF4F7CB}"
-	ProjectSection(SolutionItems) = preProject
-		Project Information.txt = Project Information.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S2_Starter", "TheAionProject.S2_Starter\TheAionProject.S2_Starter.csproj", "{0A3118F4-4BE1-4E64-8F84-DD446C0FEC33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S3_Solution", "TheAionProject.S3_Solution\TheAionProject.S3_Solution.csproj", "{D525C7A8-8175-4678-8B19-0674040A17F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S3_Starter", "TheAionProject.S3_Starter\TheAionProject.S3_Starter.csproj", "{7F34B8D9-7DFA-4F57-8D7A-22BFE7F99E0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +37,10 @@ Global
 		{D525C7A8-8175-4678-8B19-0674040A17F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D525C7A8-8175-4678-8B19-0674040A17F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D525C7A8-8175-4678-8B19-0674040A17F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F34B8D9-7DFA-4F57-8D7A-22BFE7F99E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F34B8D9-7DFA-4F57-8D7A-22BFE7F99E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F34B8D9-7DFA-4F57-8D7A-22BFE7F99E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F34B8D9-7DFA-4F57-8D7A-22BFE7F99E0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

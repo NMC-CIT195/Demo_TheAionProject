@@ -128,50 +128,34 @@ namespace TheAionProject
         }
 
         /// <summary>
-        /// get a valid integer from the player - note: if max and min values are both 0, range validation is disabled
+        /// get an integer value from the user
         /// </summary>
-        /// <param name="prompt">prompt message in console</param>
-        /// <param name="minimumValue">min. value</param>
-        /// <param name="maximumValue">max. value</param>
-        /// <param name="integerChoice">out value</param>
-        /// <returns></returns>
+        /// <returns>integer value</returns>
         private bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
         {
             bool validResponse = false;
             integerChoice = 0;
-
-            //
-            // validate on range if either minimumValue and maximumValue are not 0
-            //
-            bool validateRange = (minimumValue != 0 || maximumValue != 0);
 
             DisplayInputBoxPrompt(prompt);
             while (!validResponse)
             {
                 if (int.TryParse(Console.ReadLine(), out integerChoice))
                 {
-                    if (validateRange)
+                    if (integerChoice >= minimumValue && integerChoice <= maximumValue)
                     {
-                        if (integerChoice >= minimumValue && integerChoice <= maximumValue)
-                        {
-                            validResponse = true;
-                        }
-                        else
-                        {
-                            ClearInputBox();
-                            DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
-                            DisplayInputBoxPrompt(prompt);
-                        }
+                        validResponse = true;
                     }
                     else
                     {
-                        validResponse = true;
+                        ClearInputBox();
+                        DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                        DisplayInputBoxPrompt(prompt);
                     }
                 }
                 else
                 {
                     ClearInputBox();
-                    DisplayInputErrorMessage($"You must enter an integer value. Please try again.");
+                    DisplayInputErrorMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
                     DisplayInputBoxPrompt(prompt);
                 }
             }
@@ -558,25 +542,8 @@ namespace TheAionProject
 
         public void DisplayLookAround()
         {
-            //
-            // get current space-time location
-            //
             SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
-
-            //
-            // get list of game objects in current space-time location
-            //
-            List<GameObject> gameObjectsInCurrentSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
-
-            string messageBoxText = Text.LookAround(currentSpaceTimeLocation) + Environment.NewLine + Environment.NewLine;
-            messageBoxText += Text.GameObjectsChooseList(gameObjectsInCurrentSpaceTimeLocation);
-
-            DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
-        }
-
-        public void DisplayGameObjectInfo(GameObject gameObject)
-        {
-            DisplayGamePlayScreen("Current Location", Text.LookAt(gameObject), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
         }
 
         public int DisplayGetNextSpaceTimeLocation()
@@ -610,161 +577,11 @@ namespace TheAionProject
                 }
                 else
                 {
-                    DisplayInputErrorMessage("It appears you entered an invalid Space-Time Location id. Please try again.");
+                    DisplayInputErrorMessage("It appears you entered an invalid Space-Time location id. Please try again.");
                 }
             }
 
             return spaceTimeLocationId;
-        }
-
-        public int DisplayGetGameObjectToLookAt()
-        {
-            int gameObjectId = 0;
-            bool validGamerObjectId = false;
-
-            //
-            // get a list of game objects in the current space-time location
-            //
-            List<GameObject> gameObjectsInSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
-
-            if (gameObjectsInSpaceTimeLocation.Count > 0)
-            {
-                DisplayGamePlayScreen("Look at a Object", Text.GameObjectsChooseList(gameObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
-
-                while (!validGamerObjectId)
-                {
-                    //
-                    // get an integer from the player
-                    //
-                    GetInteger($"Enter the Id number of the object you wish to look at: ", 0, 0, out gameObjectId);
-
-                    //
-                    // validate integer as a valid game object id and in current location
-                    //
-                    if (_gameUniverse.IsValidGameObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
-                    {
-                        validGamerObjectId = true;
-                    }
-                    else
-                    {
-                        ClearInputBox();
-                        DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
-                    }
-                }
-            }
-            else
-            {
-                DisplayGamePlayScreen("Look at a Object", "It appears there are no game objects here.", ActionMenu.MainMenu, "");
-            }
-
-            return gameObjectId;
-        }
-
-
-        public int DisplayGetTravelerObjectToPickUp()
-        {
-            int gameObjectId = 0;
-            bool validGameObjectId = false;
-
-            //
-            // get a list of traveler objects in the current space-time location
-            //
-            List<TravelerObject> travelerObjectsInSpaceTimeLocation = _gameUniverse.GetTravelerObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationID);
-
-            if (travelerObjectsInSpaceTimeLocation.Count > 0)
-            {
-                DisplayGamePlayScreen("Pick Up Game Object", Text.GameObjectsChooseList(travelerObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
-
-                while (!validGameObjectId)
-                {
-                    //
-                    // get an integer from the player
-                    //
-                    GetInteger($"Enter the Id number of the object you wish to add to your inventory: ", 0, 0, out gameObjectId);
-
-                    //
-                    // validate integer as a valid game object id and in current location
-                    //
-                    if (_gameUniverse.IsValidTravelerObjectByLocationId(gameObjectId, _gameTraveler.SpaceTimeLocationID))
-                    {
-                        TravelerObject travelerObject = _gameUniverse.GetGameObjectById(gameObjectId) as TravelerObject;
-                        if (travelerObject.CanInventory)
-                        {
-                            validGameObjectId = true;
-                        }
-                        else
-                        {
-                            ClearInputBox();
-                            DisplayInputErrorMessage("It appears you may not inventory that object. Please try again.");
-                        }
-                    }
-                    else
-                    {
-                        ClearInputBox();
-                        DisplayInputErrorMessage("It appears you entered an invalid game object id. Please try again.");
-                    }
-                }
-            }
-            else
-            {
-                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no game objects here.", ActionMenu.MainMenu, "");
-            }
-
-            return gameObjectId;
-        }
-
-        public int DisplayGetInventoryObjectToPutDown()
-        {
-            int travelerObjectId = 0;
-            bool validInventoryObjectId = false;
-
-            if (_gameTraveler.Inventory.Count > 0)
-            {
-                DisplayGamePlayScreen("Put Down Game Object", Text.GameObjectsChooseList(_gameTraveler.Inventory), ActionMenu.MainMenu, "");
-
-                while (!validInventoryObjectId)
-                {
-                    //
-                    // get an integer from the player
-                    //
-                    GetInteger($"Enter the Id number of the object you wish to remove from your inventory: ", 0, 0, out travelerObjectId);
-
-                    //
-                    // find object in inventory
-                    // note: LINQ used, but a foreach loop may also be used 
-                    //
-                    TravelerObject objectToPutDown = _gameTraveler.Inventory.FirstOrDefault(o => o.Id == travelerObjectId);
-
-                    //
-                    // validate object in inventory
-                    //
-                    if (objectToPutDown != null)
-                    {
-                        validInventoryObjectId = true;
-                    }
-                    else
-                    {
-                        ClearInputBox();
-                        DisplayInputErrorMessage("It appears you entered the Id of an object not in the inventory. Please try again.");
-                    }
-                }
-            }
-            else
-            {
-                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no objects currently in inventory.", ActionMenu.MainMenu, "");
-            }
-
-            return travelerObjectId;
-        }
-
-        public void DisplayConfirmTravelerObjectAddedToInventory(TravelerObject objectAddedToInventory)
-        {
-            DisplayGamePlayScreen("Pick Up Game Object", $"The {objectAddedToInventory.Name} has been added to your inventory.", ActionMenu.MainMenu, "");
-        }
-
-        public void DisplayConfirmTravelerObjectRemovedFromInventory(TravelerObject objectRemovedFromInventory)
-        {
-            DisplayGamePlayScreen("Put Down Game Object", $"The {objectRemovedFromInventory.Name} has been removed from your inventory.", ActionMenu.MainMenu, "");
         }
 
         public void DisplayLocationsVisited()
@@ -781,19 +598,9 @@ namespace TheAionProject
             DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
-        public void DisplayInventory()
-        {
-            DisplayGamePlayScreen("Current Inventory", Text.CurrentInventory(_gameTraveler.Inventory), ActionMenu.MainMenu, "");
-        }
-
         public void DisplayListOfSpaceTimeLocations()
         {
-            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListAllSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.AdminMenu, "");
-        }
-
-        public void DisplayListOfAllGameObjects()
-        {
-            DisplayGamePlayScreen("List: Game Objects", Text.ListAllGameObjects(_gameUniverse.GameObjects), ActionMenu.AdminMenu, "");
+            DisplayGamePlayScreen("List: Space-Time Locations", Text.ListAllSpaceTimeLocations(_gameUniverse.SpaceTimeLocations), ActionMenu.MainMenu, "");
         }
 
         #endregion
