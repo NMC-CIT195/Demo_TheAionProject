@@ -55,6 +55,12 @@ namespace TheAionProject
             _gameConsoleView = new ConsoleView(_gameTraveler, _gameUniverse);
             _playingGame = true;
 
+            //
+            // add initial items to the traveler's inventory
+            //
+            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(8) as TravelerObject);
+            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(9) as TravelerObject);
+
             Console.CursorVisible = false;
         }
 
@@ -152,6 +158,10 @@ namespace TheAionProject
 
                     case TravelerAction.PutDown:
                         //PutDownAction();
+                        break;
+
+                    case TravelerAction.Inventory:
+                        _gameConsoleView.DisplayInventory();
                         break;
 
                     case TravelerAction.ListSpaceTimeLocations:
