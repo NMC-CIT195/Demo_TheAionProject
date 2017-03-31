@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D525C7A8-8175-4678-8B19-0674040A17F0}</ProjectGuid>
+    <ProjectGuid>{77730CB9-C982-4F2F-966C-C652644D77B8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TheAionProject.S3_Starter</RootNamespace>
-    <AssemblyName>TheAionProject.S3_Starter</AssemblyName>
+    <RootNamespace>TheAionProject</RootNamespace>
+    <AssemblyName>TheAionProject</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,22 +45,25 @@
   <ItemGroup>
     <Compile Include="Assets\ActionMenu.cs" />
     <Compile Include="Assets\Text.cs" />
-    <Compile Include="Assets\UniverseObjectsSpaceTimeLocations.cs" />
     <Compile Include="Assets\UniverseObjectsGameObjects.cs" />
+    <Compile Include="Assets\UniverseObjectsSpaceTimeLocations.cs" />
     <Compile Include="ConsoleUtilities\ConsoleLayout.cs" />
     <Compile Include="ConsoleUtilities\ConsoleTheme.cs" />
     <Compile Include="ConsoleUtilities\ConsoleWindowControl.cs" />
     <Compile Include="ConsoleUtilities\ConsoleWindowHelper.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\Civilian.cs" />
+    <Compile Include="Models\Enums\TravelerAction.cs" />
     <Compile Include="Models\Enums\TravelerObjectType.cs" />
     <Compile Include="Models\GameObject.cs" />
-    <Compile Include="Models\SpaceTimeLocationObject.cs" />
-    <Compile Include="Models\TravelerObject.cs" />
     <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Npc.cs" />
     <Compile Include="Models\SpaceTimeLocation.cs" />
+    <Compile Include="Models\SpaceTimeLocationObject.cs" />
+    <Compile Include="Models\ISpeak.cs" />
     <Compile Include="Models\Traveler.cs" />
-    <Compile Include="Models\Enums\TravelerAction.cs" />
+    <Compile Include="Models\TravelerObject.cs" />
     <Compile Include="Models\Universe.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
