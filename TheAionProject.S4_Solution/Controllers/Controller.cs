@@ -98,7 +98,7 @@ namespace TheAionProject
             //
             // prepare game play screen
             //
-            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationId);
             _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrentLocationInfo(_currentLocation), ActionMenu.MainMenu, "");
 
             //
@@ -172,6 +172,10 @@ namespace TheAionProject
                         _gameConsoleView.DisplayListOfAllGameObjects();
                         break;
 
+                    case TravelerAction.ListNonplayerCharacters:
+                        _gameConsoleView.DisplayListOfAllNpcObjects();
+                        break;
+
                     case TravelerAction.AdminMenu:
                         ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
                         _gameConsoleView.DisplayGamePlayScreen("Admin Menu", "Select an operation from the menu.", ActionMenu.AdminMenu, "");
@@ -205,8 +209,8 @@ namespace TheAionProject
             //
             // get new location choice and update the current location property
             //                        
-            _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
-            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
+            _gameTraveler.SpaceTimeLocationId = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
+            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationId);
 
             //
             // display the new space-time location info
@@ -294,7 +298,7 @@ namespace TheAionProject
             // remove the object from inventory and set the space-time location to the current value
             //
             _gameTraveler.Inventory.Remove(travelerObject);
-            travelerObject.SpaceTimeLocationId = _gameTraveler.SpaceTimeLocationID;
+            travelerObject.SpaceTimeLocationId = _gameTraveler.SpaceTimeLocationId;
 
             //
             // display confirmation message
@@ -313,7 +317,7 @@ namespace TheAionProject
             _gameTraveler.Name = traveler.Name;
             _gameTraveler.Age = traveler.Age;
             _gameTraveler.Race = traveler.Race;
-            _gameTraveler.SpaceTimeLocationID = 1;
+            _gameTraveler.SpaceTimeLocationId = 1;
 
             _gameTraveler.ExperiencePoints = 0;
             _gameTraveler.Health = 100;

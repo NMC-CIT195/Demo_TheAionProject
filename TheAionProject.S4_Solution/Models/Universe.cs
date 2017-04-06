@@ -14,10 +14,11 @@ namespace TheAionProject
         #region ***** define all lists to be maintained by the Universe object *****
 
         //
-        // list of all space-time locations and game objects
+        // list of all space-time locations, game, and NPC objects
         //
         private List<SpaceTimeLocation> _spaceTimeLocations;
         private List<GameObject> _gameObjects;
+        private List<Npc> _npcs;
 
         public List<SpaceTimeLocation> SpaceTimeLocations
         {
@@ -29,6 +30,12 @@ namespace TheAionProject
         {
             get { return _gameObjects; }
             set { _gameObjects = value; }
+        }
+
+        public List<Npc> Npcs
+        {
+            get { return _npcs; }
+            set { _npcs = value; }
         }
 
         #endregion
@@ -56,7 +63,8 @@ namespace TheAionProject
         private void IntializeUniverse()
         {
             _spaceTimeLocations = UniverseObjects.SpaceTimeLocations;
-            _gameObjects = UniverseObjects.gameObjects;            
+            _gameObjects = UniverseObjects.gameObjects;
+            _npcs = UniverseObjects.Npcs;           
         }
 
         #endregion

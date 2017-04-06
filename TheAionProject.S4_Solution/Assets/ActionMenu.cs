@@ -71,6 +71,7 @@ namespace TheAionProject
                 {
                     { '1', TravelerAction.ListSpaceTimeLocations },
                     { '2', TravelerAction.ListGameObjects},
+                    { '3', TravelerAction.ListNonplayerCharacters},
                     { '0', TravelerAction.ReturnToMainMenu }
                 }
         };

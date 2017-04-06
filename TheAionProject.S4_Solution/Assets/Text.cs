@@ -191,7 +191,7 @@ namespace TheAionProject
             string spaceTimeLocationList = null;
             foreach (SpaceTimeLocation spaceTimeLocation in spaceTimeLocations)
             {
-                if (spaceTimeLocation.SpaceTimeLocationID != gametraveler.SpaceTimeLocationID)
+                if (spaceTimeLocation.SpaceTimeLocationID != gametraveler.SpaceTimeLocationId)
                 {
                     spaceTimeLocationList +=
                         $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
@@ -297,6 +297,43 @@ namespace TheAionProject
             }
 
             messageBoxText += gameObjectRows;
+
+            return messageBoxText;
+        }
+
+        public static string ListAllNpcObjects(IEnumerable<Npc> npcObjects)
+        {
+            //
+            // display table name and column headers
+            //
+            string messageBoxText =
+                "NPC Objects\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) +
+                "Name".PadRight(30) +
+                "Space-Time Location Id".PadRight(10) + "\n" +
+                "---".PadRight(10) +
+                "----------------------".PadRight(30) +
+                "----------------------".PadRight(10) + "\n";
+
+            //
+            // display all npc objects in rows
+            //
+            string npcObjectRows = null;
+            foreach (Npc npcObject in npcObjects)
+            {
+                npcObjectRows +=
+                    $"{npcObject.Id}".PadRight(10) +
+                    $"{npcObject.Name}".PadRight(30) +
+                    $"{npcObject.SpaceTimeLocationId}".PadRight(10) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += npcObjectRows;
 
             return messageBoxText;
         }

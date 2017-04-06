@@ -23,6 +23,7 @@ namespace TheAionProject
         TravelerLocationsVisited,
         ListSpaceTimeLocations,
         ListGameObjects,
+        ListNonplayerCharacters,
         AdminMenu,
         ReturnToMainMenu,
         Exit

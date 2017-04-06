@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheAionProject.Models
+namespace TheAionProject
 {
-    public class Npc : Character
+    public abstract class Npc : Character
     {
-        public string Description { get; set; }
+        public abstract int Id { get; set; }
+        public abstract string Description { get; set; }
     }
 }

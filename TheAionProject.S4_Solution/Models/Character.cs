@@ -26,7 +26,7 @@ namespace TheAionProject
         #region FIELDS
 
         protected string _name;
-        protected int _spaceTimeLocationID;
+        protected int _spaceTimeLocationId;
         protected int _age;
         protected RaceType _race;
 
@@ -40,10 +40,10 @@ namespace TheAionProject
             set { _name = value; }
         }
 
-        public int SpaceTimeLocationID
+        public int SpaceTimeLocationId
         {
-            get { return _spaceTimeLocationID; }
-            set { _spaceTimeLocationID = value; }
+            get { return _spaceTimeLocationId; }
+            set { _spaceTimeLocationId = value; }
         }
 
         public int Age
@@ -71,7 +71,7 @@ namespace TheAionProject
         {
             _name = name;
             _race = race;
-            _spaceTimeLocationID = spaceTimeLocationID;
+            _spaceTimeLocationId = spaceTimeLocationID;
         }
 
         #endregion

@@ -11,7 +11,7 @@ namespace TheAionProject
     /// </summary>
     public static partial class UniverseObjects
     {
-        public static List<GameObject> gameObjects = new List<GameObject>()
+        public static List<GameObject> GameObjects = new List<GameObject>()
         {
             new TravelerObject
             {
