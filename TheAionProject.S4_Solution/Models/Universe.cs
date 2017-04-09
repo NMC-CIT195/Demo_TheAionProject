@@ -169,6 +169,41 @@ namespace TheAionProject
             }
         }
 
+
+        /// <summary>
+        /// validate NPC object id number in current location
+        /// </summary>
+        /// <param name="npcId"></param>
+        /// <returns>is Id valid</returns>
+        public bool IsValidNpcByLocationId(int npcId, int currentSpaceTimeLocation)
+        {
+            List<int> npcIds = new List<int>();
+
+            //
+            // create a list of NPC ids in current space-time location
+            //
+            foreach (Npc npc in _npcs)
+            {
+                if (npc.SpaceTimeLocationId == currentSpaceTimeLocation)
+                {
+                    npcIds.Add(npc.Id);
+                }
+
+            }
+
+            //
+            // determine if the game object id is a valid id and return the result
+            //
+            if (npcIds.Contains(npcId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// determine if a location is accessible to the player
         /// </summary>
@@ -309,6 +344,11 @@ namespace TheAionProject
             return gameObjects;
         }
 
+        /// <summary>
+        /// get all traveler objects in a location
+        /// </summary>
+        /// <param name="spaceTimeLocationId">space-time location id</param>
+        /// <returns>list of traveler objects</returns>
         public List<TravelerObject> GetTravelerObjectsBySpaceTimeLocationId(int spaceTimeLocationId)
         {
             List<TravelerObject> travelerObjects = new List<TravelerObject>();
@@ -325,6 +365,62 @@ namespace TheAionProject
             }
 
             return travelerObjects;
+        }
+
+        /// <summary>
+        /// get an NPC object using an Id
+        /// </summary>
+        /// <param name="Id">NPC object Id</param>
+        /// <returns>requested NPC object</returns>
+        public Npc GetNpcById(int Id)
+        {
+            Npc npcToReturn = null;
+
+            //
+            // run through the NPC object list and grab the correct one
+            //
+            foreach (Npc npc in _npcs)
+            {
+                if (npc.Id == Id)
+                {
+                    npcToReturn = npc;
+                }
+            }
+
+            //
+            // the specified ID was not found in the universe
+            // throw and exception
+            //
+            if (npcToReturn == null)
+            {
+                string feedbackMessage = $"The NPC ID {Id} does not exist in the current Universe.";
+                throw new ArgumentException(Id.ToString(), feedbackMessage);
+            }
+
+            return npcToReturn;
+        }
+
+        /// <summary>
+        /// get all NPC objects in a location
+        /// </summary>
+        /// <param name="spaceTimeLocationId">space-time location id</param>
+        /// <returns>list of NPC objects</returns>
+        public List<Npc> GetNpcsBySpaceTimeLocationId(int spaceTimeLocationId)
+        {
+            List<Npc> npcs = new List<Npc>();
+
+            //
+            // run through the NPC object list and grab all that are in the current space-time location
+            //
+            foreach (Npc npc in _npcs)
+            {
+                if (npc.SpaceTimeLocationId == spaceTimeLocationId)
+                {
+                    npcs.Add(npc);
+                }
+            }
+
+            return npcs;
         }
 
         #endregion
