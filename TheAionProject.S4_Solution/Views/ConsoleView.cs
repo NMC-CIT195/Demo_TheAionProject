@@ -549,7 +549,7 @@ namespace TheAionProject
         public void DisplayTravelerInfo()
         {
             SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationId);
-            DisplayGamePlayScreen("Traveler Information", Text.TravelerInfo(_gameTraveler, currentSpaceTimeLocation), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Traveler Information", Text.TravelerInfo(_gameTraveler, currentSpaceTimeLocation), ActionMenu.TravelerMenu, "");
         }
 
         /// <summary>
@@ -576,8 +576,14 @@ namespace TheAionProject
             //
             List<GameObject> gameObjectsInCurrentSpaceTimeLocation = _gameUniverse.GetGameObjectsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationId);
 
+            //
+            // get list of NPCs in current space-time location
+            //
+            List<Npc> npcsInCurrentSpaceTimeLocation = _gameUniverse.GetNpcsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationId);
+
             string messageBoxText = Text.LookAround(currentSpaceTimeLocation) + Environment.NewLine + Environment.NewLine;
-            messageBoxText += Text.GameObjectsChooseList(gameObjectsInCurrentSpaceTimeLocation);
+            messageBoxText += Text.GameObjectsChooseList(gameObjectsInCurrentSpaceTimeLocation) + Environment.NewLine;
+            messageBoxText += Text.NpcsChooseList(npcsInCurrentSpaceTimeLocation);
 
             DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
         }
@@ -588,7 +594,7 @@ namespace TheAionProject
         /// <param name="gameObject"></param>
         public void DisplayGameObjectInfo(GameObject gameObject)
         {
-            DisplayGamePlayScreen("Current Location", Text.LookAt(gameObject), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Current Location", Text.LookAt(gameObject), ActionMenu.ObjectMenu, "");
         }
 
         /// <summary>
@@ -649,7 +655,7 @@ namespace TheAionProject
 
             if (gameObjectsInSpaceTimeLocation.Count > 0)
             {
-                DisplayGamePlayScreen("Look at a Object", Text.GameObjectsChooseList(gameObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
+                DisplayGamePlayScreen("Look at a Object", Text.GameObjectsChooseList(gameObjectsInSpaceTimeLocation), ActionMenu.ObjectMenu, "");
 
                 while (!validGamerObjectId)
                 {
@@ -674,7 +680,7 @@ namespace TheAionProject
             }
             else
             {
-                DisplayGamePlayScreen("Look at a Object", "It appears there are no game objects here.", ActionMenu.MainMenu, "");
+                DisplayGamePlayScreen("Look at a Object", "It appears there are no game objects here.", ActionMenu.ObjectMenu, "");
             }
 
             return gameObjectId;
@@ -696,7 +702,7 @@ namespace TheAionProject
 
             if (travelerObjectsInSpaceTimeLocation.Count > 0)
             {
-                DisplayGamePlayScreen("Pick Up Game Object", Text.GameObjectsChooseList(travelerObjectsInSpaceTimeLocation), ActionMenu.MainMenu, "");
+                DisplayGamePlayScreen("Pick Up Game Object", Text.GameObjectsChooseList(travelerObjectsInSpaceTimeLocation), ActionMenu.ObjectMenu, "");
 
                 while (!validGameObjectId)
                 {
@@ -730,7 +736,7 @@ namespace TheAionProject
             }
             else
             {
-                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no game objects here.", ActionMenu.MainMenu, "");
+                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no game objects here.", ActionMenu.ObjectMenu, "");
             }
 
             return gameObjectId;
@@ -747,7 +753,7 @@ namespace TheAionProject
 
             if (_gameTraveler.Inventory.Count > 0)
             {
-                DisplayGamePlayScreen("Put Down Game Object", Text.GameObjectsChooseList(_gameTraveler.Inventory), ActionMenu.MainMenu, "");
+                DisplayGamePlayScreen("Put Down Game Object", Text.GameObjectsChooseList(_gameTraveler.Inventory), ActionMenu.ObjectMenu, "");
 
                 while (!validInventoryObjectId)
                 {
@@ -778,7 +784,7 @@ namespace TheAionProject
             }
             else
             {
-                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no objects currently in inventory.", ActionMenu.MainMenu, "");
+                DisplayGamePlayScreen("Pick Up Game Object", "It appears there are no objects currently in inventory.", ActionMenu.ObjectMenu, "");
             }
 
             return travelerObjectId;
@@ -790,7 +796,7 @@ namespace TheAionProject
         /// <param name="objectAddedToInventory">game object</param>
         public void DisplayConfirmTravelerObjectAddedToInventory(TravelerObject objectAddedToInventory)
         {
-            DisplayGamePlayScreen("Pick Up Game Object", $"The {objectAddedToInventory.Name} has been added to your inventory.", ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Pick Up Game Object", $"The {objectAddedToInventory.Name} has been added to your inventory.", ActionMenu.ObjectMenu, "");
         }
 
         /// <summary>
@@ -799,7 +805,7 @@ namespace TheAionProject
         /// <param name="objectRemovedFromInventory">game object</param>
         public void DisplayConfirmTravelerObjectRemovedFromInventory(TravelerObject objectRemovedFromInventory)
         {
-            DisplayGamePlayScreen("Put Down Game Object", $"The {objectRemovedFromInventory.Name} has been removed from your inventory.", ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Put Down Game Object", $"The {objectRemovedFromInventory.Name} has been removed from your inventory.", ActionMenu.ObjectMenu, "");
         }
 
         /// <summary>
@@ -816,7 +822,7 @@ namespace TheAionProject
                 visitedSpaceTimeLocations.Add(_gameUniverse.GetSpaceTimeLocationById(spaceTimeLocationId));
             }
 
-            DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedSpaceTimeLocations), ActionMenu.TravelerMenu, "");
         }
 
         /// <summary>
@@ -824,7 +830,7 @@ namespace TheAionProject
         /// </summary>
         public void DisplayInventory()
         {
-            DisplayGamePlayScreen("Current Inventory", Text.CurrentInventory(_gameTraveler.Inventory), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Current Inventory", Text.CurrentInventory(_gameTraveler.Inventory), ActionMenu.TravelerMenu, "");
         }
 
         /// <summary>

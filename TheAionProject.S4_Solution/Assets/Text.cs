@@ -487,6 +487,40 @@ namespace TheAionProject
             return messageBoxText;
         }
 
+        public static string NpcsChooseList(IEnumerable<Npc> npcs)
+        {
+            //
+            // display table name and column headers
+            //
+            string messageBoxText =
+                "NPCs\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) +
+                "Name".PadRight(30) + "\n" +
+                "---".PadRight(10) +
+                "----------------------".PadRight(30) + "\n";
+
+            //
+            // display all NPCs in rows
+            //
+            string npcRows = null;
+            foreach (Npc npc in npcs)
+            {
+                npcRows +=
+                    $"{npc.Id}".PadRight(10) +
+                    $"{npc.Name}".PadRight(30) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += npcRows;
+
+            return messageBoxText;
+        }
+
         #endregion
 
         public static List<string> StatusBox(Traveler traveler, Universe universe)
