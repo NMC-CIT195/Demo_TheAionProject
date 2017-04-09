@@ -351,6 +351,34 @@ namespace TheAionProject
 
         }
 
+
+        /// <summary>
+        /// process the Talk To action
+        /// </summary>
+        private void TalkToAction()
+        {
+            //
+            // display a list of NPCs in space-time location and get a player choice
+            //
+            int npcToTalkToId = _gameConsoleView.DisplayGetNpcToTalkTo();
+
+            //
+            // display NPC's message
+            //
+            if (npcToTalkToId != 0)
+            {
+                //
+                // get the NPC from the universe
+                //
+                Npc npc = _gameUniverse.GetNpcById(npcToTalkToId);
+
+                //
+                // display information for the object chosen
+                //
+                _gameConsoleView.DisplayTalkTo(npc);
+            }
+        }
+
         /// <summary>
         /// initialize the player info
         /// </summary>

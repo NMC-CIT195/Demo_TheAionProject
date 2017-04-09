@@ -857,6 +857,67 @@ namespace TheAionProject
             DisplayGamePlayScreen("List: Npc Objects", Text.ListAllNpcObjects(_gameUniverse.Npcs), ActionMenu.AdminMenu, "");
         }
 
+        /// <summary>
+        /// display get the NPC to talk to
+        /// </summary>
+        /// <returns>NPC Id</returns>
+        public int DisplayGetNpcToTalkTo()
+        {
+            int npcId = 0;
+            bool validNpcId = false;
+
+            //
+            // get a list of NPCs in the current space-time location
+            //
+            List<Npc> npcsInSpaceTimeLocation = _gameUniverse.GetNpcsBySpaceTimeLocationId(_gameTraveler.SpaceTimeLocationId);
+
+            if (npcsInSpaceTimeLocation.Count > 0)
+            {
+                DisplayGamePlayScreen("Choose Character to Speak With", Text.ListAllNpcObjects(npcsInSpaceTimeLocation), ActionMenu.NpcMenu, "");
+
+                while (!validNpcId)
+                {
+                    //
+                    // get an integer from the player
+                    //
+                    GetInteger($"Enter the Id number of the character you wish to speak with: ", 0, 0, out npcId);
+
+                    //
+                    // validate integer as a valid NPC id and in current location
+                    //
+                    if (_gameUniverse.IsValidNpcByLocationId(npcId, _gameTraveler.SpaceTimeLocationId))
+                    {
+                        Npc npc = _gameUniverse.GetNpcById(npcId);
+                        if (npc is ISpeak)
+                        {
+                            validNpcId = true;
+                        }
+                        else
+                        {
+                            ClearInputBox();
+                            DisplayInputErrorMessage("It appears this character has nothing to say. Please try again.");
+                        }
+                    }
+                    else
+                    {
+                        ClearInputBox();
+                        DisplayInputErrorMessage("It appears you entered an invalid NPC id. Please try again.");
+                    }
+                }
+            }
+            else
+            {
+                DisplayGamePlayScreen("Choose Character to Speak With", "It appears there are no NPCs here.", ActionMenu.NpcMenu, "");
+            }
+
+            return npcId;
+        }
+
+        public void DisplayTalkTo(Npc npc)
+        {
+            DisplayGamePlayScreen("Speak to Character", Text.SpeakTo(npc), ActionMenu.NpcMenu, "");
+        }
+
         #endregion
 
         #endregion

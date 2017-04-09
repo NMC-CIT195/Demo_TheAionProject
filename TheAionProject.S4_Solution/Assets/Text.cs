@@ -521,6 +521,14 @@ namespace TheAionProject
             return messageBoxText;
         }
 
+        public static string SpeakTo(Npc npc)
+        {
+            string message = "";
+            Npc speakingNpc = npc as ISpeak;
+
+            return message;
+        }
+
         #endregion
 
         public static List<string> StatusBox(Traveler traveler, Universe universe)
