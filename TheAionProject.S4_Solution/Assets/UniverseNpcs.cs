@@ -39,6 +39,14 @@ namespace TheAionProject
                     "It was always meant for good. We had now idea.",
                     "Is that man following you?"
                 }
+            },
+
+            new Civilian
+            {
+                Id = 3,
+                Name = "Thorian Diplomat",
+                SpaceTimeLocationId = 2,
+                Description = "A Thorian diplomat dressed in traditional phlox and cords."
             }
         };
     }

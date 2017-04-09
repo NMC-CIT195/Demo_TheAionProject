@@ -156,6 +156,10 @@ namespace TheAionProject
                         _gameConsoleView.DisplayInventory();
                         break;
 
+                    case TravelerAction.TalkTo:
+                        TalkToAction();
+                        break;
+
                     case TravelerAction.ListSpaceTimeLocations:
                         _gameConsoleView.DisplayListOfSpaceTimeLocations();
                         break;

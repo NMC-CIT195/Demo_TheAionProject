@@ -873,7 +873,7 @@ namespace TheAionProject
 
             if (npcsInSpaceTimeLocation.Count > 0)
             {
-                DisplayGamePlayScreen("Choose Character to Speak With", Text.ListAllNpcObjects(npcsInSpaceTimeLocation), ActionMenu.NpcMenu, "");
+                DisplayGamePlayScreen("Choose Character to Speak With", Text.NpcsChooseList(npcsInSpaceTimeLocation), ActionMenu.NpcMenu, "");
 
                 while (!validNpcId)
                 {
@@ -913,9 +913,22 @@ namespace TheAionProject
             return npcId;
         }
 
+        /// <summary>
+        /// display the message from the NPC
+        /// </summary>
+        /// <param name="npc">speaking NPC</param>
         public void DisplayTalkTo(Npc npc)
         {
-            DisplayGamePlayScreen("Speak to Character", Text.SpeakTo(npc), ActionMenu.NpcMenu, "");
+            ISpeak speakingNpc = npc as ISpeak;
+
+            string message = speakingNpc.Speak();
+
+            if (message == "")
+            {
+                message = "It appears this character has nothing to say. Please try again.";
+            }
+
+            DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
         }
 
         #endregion
