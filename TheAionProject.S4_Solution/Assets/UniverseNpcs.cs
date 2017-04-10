@@ -36,7 +36,7 @@ namespace TheAionProject
                 Messages = new List<string>
                 {
                     "I have to go. Good bye!",
-                    "It was always meant for good. We had now idea.",
+                    "It was always meant for good. We had no idea.",
                     "Is that man following you?"
                 }
             },
