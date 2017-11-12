@@ -45,9 +45,10 @@ namespace TheAionProject
                 Name = "Rotogenic Medicine",
                 SpaceTimeLocationId = 1,
                 Description = "A wooden box containing a small vial filled with a blue liquid.",
+                PickUpMessage = "You drink the blue liquid down, feel a tingle in your chest with added health.",
                 Type = TravelerObjectType.Medicine,
                 Value = 45,
-                CanInventory = false,
+                CanInventory = true,
                 IsConsumable = true,
                 IsVisible = true
             },

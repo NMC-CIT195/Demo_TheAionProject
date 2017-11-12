@@ -225,7 +225,7 @@ namespace TheAionProject
             if (spaceTimeLocation == null)
             {
                 string feedbackMessage = $"The Space-Time Location ID {Id} does not exist in the current Universe.";
-                throw new ArgumentException(Id.ToString(), feedbackMessage);
+                throw new ArgumentException(feedbackMessage, Id.ToString());
             }
 
             return spaceTimeLocation;
@@ -317,6 +317,26 @@ namespace TheAionProject
             }
 
             return travelerObjects;
+        }
+
+
+        /// <summary>
+        /// get the traveler's inventory
+        /// </summary>
+        /// <returns>list of inventory objects</returns>
+        public List<TravelerObject> TravelerInventory()
+        {
+            List<TravelerObject> inventory = new List<TravelerObject>(); ;
+
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                if (gameObject.SpaceTimeLocationId == 0)
+                {
+                    inventory.Add(gameObject as TravelerObject);
+                }
+            }
+
+            return inventory;
         }
 
         #endregion

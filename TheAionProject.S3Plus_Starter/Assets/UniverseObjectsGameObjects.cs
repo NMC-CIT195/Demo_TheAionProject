@@ -47,7 +47,7 @@ namespace TheAionProject
                 Description = "A wooden box containing a small vial filled with a blue liquid.",
                 Type = TravelerObjectType.Medicine,
                 Value = 45,
-                CanInventory = false,
+                CanInventory = true,
                 IsConsumable = true,
                 IsVisible = true
             },

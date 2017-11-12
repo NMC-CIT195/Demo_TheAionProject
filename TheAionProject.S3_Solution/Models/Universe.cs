@@ -225,7 +225,7 @@ namespace TheAionProject
             if (spaceTimeLocation == null)
             {
                 string feedbackMessage = $"The Space-Time Location ID {Id} does not exist in the current Universe.";
-                throw new ArgumentException(Id.ToString(), feedbackMessage);
+                throw new ArgumentException(feedbackMessage, Id.ToString());
             }
 
             return spaceTimeLocation;
@@ -277,7 +277,7 @@ namespace TheAionProject
             if (gameObjectToReturn == null)
             {
                 string feedbackMessage = $"The Game Object ID {Id} does not exist in the current Universe.";
-                throw new ArgumentException(Id.ToString(), feedbackMessage);
+                throw new ArgumentException(feedbackMessage, Id.ToString());
             }
 
             return gameObjectToReturn;
