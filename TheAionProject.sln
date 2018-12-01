@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S1_Starter", "TheAionProject.S1_Starter\TheAionProject.S1_Starter.csproj", "{F03D0B1D-A1E7-41FB-8A70-2E60981B15F9}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S3Plus_Solution", "TheAionProject.S3Plus_Solution\TheAionProject.S3Plus_Solution.csproj", "{F8266A74-844A-4313-984E-6A3E624A1AD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject.S3Plus_Starter", "TheAionProject.S3Plus_Starter\TheAionProject.S3Plus_Starter.csproj", "{36DEC12E-1389-482D-8075-15C398E9652E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheAionProject_WinForms_S1.Sol", "TheAionProject_WinForms_S1.Sol\TheAionProject_WinForms_S1.Sol.csproj", "{43CBBE48-9548-400D-85F0-8EE1D72D323A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{36DEC12E-1389-482D-8075-15C398E9652E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36DEC12E-1389-482D-8075-15C398E9652E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36DEC12E-1389-482D-8075-15C398E9652E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43CBBE48-9548-400D-85F0-8EE1D72D323A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43CBBE48-9548-400D-85F0-8EE1D72D323A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43CBBE48-9548-400D-85F0-8EE1D72D323A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43CBBE48-9548-400D-85F0-8EE1D72D323A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
